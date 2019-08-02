@@ -16,7 +16,10 @@
     <ion-card-content *ngIf="!collapseCard">
 
       <ion-item>
-        <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
+        <ion-input type="text" placeholder="Title *" [(ngModel)]="event.title"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input type="text" placeholder="Book By *" [(ngModel)]="event.bookBy"></ion-input>
       </ion-item>
       <ion-item>
         <ion-input type="text" placeholder="Description" [(ngModel)]="event.desc"></ion-input>
@@ -33,7 +36,7 @@
         <ion-label>All Day?</ion-label>
         <ion-checkbox [(ngModel)]="event.allDay"></ion-checkbox>
       </ion-item>
-      <ion-button fill="outline" expand="block" (click)="addEvent()" [disabled]="event.title == ''">Add Event</ion-button>
+      <ion-button fill="outline" expand="block" (click)="addEvent()" [disabled]="event.title == '' || event.bookBy == ''">Add Event</ion-button>
 
     </ion-card-content>
   </ion-card>

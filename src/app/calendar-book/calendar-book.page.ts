@@ -20,6 +20,7 @@ export class CalendarBookPage implements OnInit {
 
   event = {
     title: '',
+    bookBy: '',
     desc: '',
     startTime: '',
     endTime: '',
@@ -71,6 +72,7 @@ export class CalendarBookPage implements OnInit {
   resetEvent() {
     this.event = {
       title: '',
+      bookBy: '',
       desc: '',
       startTime: new Date().toISOString(),
       endTime: new Date().toISOString(),
@@ -82,10 +84,12 @@ export class CalendarBookPage implements OnInit {
   addEvent() {
     let eventCopy = {
       title: this.event.title,
+      bookBy: this.event.bookBy,
       startTime: new Date(this.event.startTime),
       endTime: new Date(this.event.endTime),
       allDay: this.event.allDay,
       desc: this.event.desc
+      
     }
 
     if (eventCopy.allDay) {
@@ -151,7 +155,7 @@ export class CalendarBookPage implements OnInit {
     let end = formatDate(event.endTime, 'medium', this.locale);
 
     const alert = await this.alertCtrl.create({
-      header: event.title,
+      header: event.title + ' by ' + event.bookBy,
       subHeader: event.desc,
       message: 'From: ' + start + '<br><br>To: ' + end,
       buttons: ['OK']
@@ -208,4 +212,6 @@ export class CalendarBookPage implements OnInit {
     
         await alert.present();
   }
+
+
 }

@@ -1,5 +1,7 @@
 {
   "name": "bookingApp",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
