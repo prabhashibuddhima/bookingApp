@@ -35,6 +35,7 @@ export class CalendarBookPage implements OnInit {
     mode: 'month',
     currentDate: new Date(),
     currentMonth: new Date().getMonth(),
+    
   };
 
   @ViewChild(CalendarComponent, { static: true }) myCal: CalendarComponent;
@@ -95,8 +96,13 @@ export class CalendarBookPage implements OnInit {
       eventCopy.endTime = new Date(Date.UTC(end.getUTCFullYear(), end.getUTCMonth(), end.getUTCDate() + 1));
     }
 
-    this.eventSource.push(eventCopy);
-    this.myCal.loadEvents();
+    if((eventCopy.startTime < this.calendar.currentDate) || (eventCopy.startTime> eventCopy.endTime)){
+      this.TimeValidateMsg();
+    }else{
+      this.eventSource.push(eventCopy);
+      this.myCal.loadEvents();
+    }
+   
     this.resetEvent();
   }
 
@@ -104,7 +110,7 @@ export class CalendarBookPage implements OnInit {
   next() {
     var swiper = document.querySelector('.swiper-container')['swiper'];
     swiper.slideNext();
-    this.calendar.currentMonth = this.calendar.currentMonth+1;
+    this.calendar.currentMonth = this.calendar.currentMonth + 1;
     this.getMonthName();
 
     
@@ -113,7 +119,7 @@ export class CalendarBookPage implements OnInit {
   back() {
     var swiper = document.querySelector('.swiper-container')['swiper'];
     swiper.slidePrev();
-    this.calendar.currentMonth = this.calendar.currentMonth-1;
+    this.calendar.currentMonth = this.calendar.currentMonth - 1;
     this.getMonthName();
     
   }
@@ -189,5 +195,17 @@ export class CalendarBookPage implements OnInit {
       this.monthName = "December";
     }
 
+  }
+
+
+  async TimeValidateMsg(){
+    const alert = await this.alertCtrl.create({
+          header: 'Wrong Time!',
+         
+          message: 'Time selection went wrong. Please do not select a past date or time !!',
+          buttons: ['OK']
+        });
+    
+        await alert.present();
   }
 }

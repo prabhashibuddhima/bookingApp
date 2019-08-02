@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content>
-  <!-- Card for adding a new event -->
+  
   <ion-card>
     <ion-card-header tappable (click)="collapseCard = !collapseCard">
       <ion-card-title>Add a new Event</ion-card-title>
@@ -39,7 +39,7 @@
   </ion-card>
 
   <ion-row>
-    <!-- Change the displayed calendar mode -->
+   
     <ion-col size="4">
       <ion-button expand="block" [color]="calendar.mode == 'month' ? 'primary' : 'secondary'" (click)="changeMode('month')">Month</ion-button>
     </ion-col>
@@ -50,7 +50,7 @@
       <ion-button expand="block" [color]="calendar.mode == 'day' ? 'primary' : 'secondary'" (click)="changeMode('day')">Day</ion-button>
     </ion-col>
 
-    <!-- Move back one screen of the slides -->
+    
     <ion-col size="3" text-left>
       <ion-button fill="clear" (click)="back()">
         <ion-icon name="arrow-back" slot="icon-only"></ion-icon>
@@ -66,7 +66,7 @@
      </p>
     </ion-col>
 
-    <!-- Move forward one screen of the slides -->
+    
     <ion-col size="3" text-right>
       <ion-button fill="clear" (click)="next()">
         <ion-icon name="arrow-forward" slot="icon-only"></ion-icon>
