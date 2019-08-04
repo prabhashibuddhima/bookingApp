@@ -1,3 +1,4 @@
+import { BoardroomService } from './../service/boardroom.service';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CalendarComponent } from 'ionic2-calendar/calendar';
@@ -17,6 +18,8 @@ export class CalendarBookPage implements OnInit {
   selectedBdRoom: any = {};
   bdName: any;
   monthName: any;
+  bdno: any;
+
 
   event = {
     title: '',
@@ -41,7 +44,7 @@ export class CalendarBookPage implements OnInit {
 
   @ViewChild(CalendarComponent, { static: true }) myCal: CalendarComponent;
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute, private alertCtrl: AlertController, @Inject(LOCALE_ID) private locale: string) { }
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, private alertCtrl: AlertController, @Inject(LOCALE_ID) private locale: string, private boardroomService: BoardroomService) { }
 
   ngOnInit() {
     console.log(this.calendar.currentMonth);
@@ -54,8 +57,10 @@ export class CalendarBookPage implements OnInit {
     console.log(this.selectedBdRoom);
     if (this.selectedBdRoom.boardRoom == "1") {
       this.bdName = "Board Room 1";
+      this.bdno=1;
     } else {
       this.bdName = "Board Room 2";
+      this.bdno=2;
     }
 
     console.log(this.bdName);
@@ -108,6 +113,24 @@ export class CalendarBookPage implements OnInit {
     }
    
     this.resetEvent();
+    console.log(this.bdno,eventCopy.title,eventCopy.bookBy,eventCopy.desc,eventCopy.startTime,eventCopy.endTime);
+
+    let data = {
+      "bdno": this.bdno,
+      "title": eventCopy.title,
+      "person": eventCopy.bookBy,
+      "description": eventCopy.desc,
+      "startTime": eventCopy.startTime.getTime(),
+      "endTime": eventCopy.endTime.getTime()
+    }
+
+    this.boardroomService.submitEvent(data).then(async res => {
+
+    }).catch(error => {
+      //alert(JSON.stringify(error));
+     
+    });
+
   }
 
   // Change current month/week/day
