@@ -5,7 +5,7 @@
   
   
   input[type="radio"]:checked + label {
-    background-color: #148F77 ;
+    background-color: #95040B ;
     color: white;
   }
 
@@ -25,15 +25,15 @@
   border: 1px solid #E6E6E6;
   border-radius: 4px;
   box-sizing: border-box;
-  -o-box-shadow: 5px 5px 5px #A4A4A4;
-  -khtml-box-shadow: 5px 5px 5px #A4A4A4;
-  -webkit-box-shadow: 5px 5px 5px #A4A4A4;
-  -moz-box-shadow: 5px 5px 5px #A4A4A4;
-  box-shadow: 5px 5px 5px #A4A4A4;
+  // -o-box-shadow: 5px 5px 5px #A4A4A4;
+  // -khtml-box-shadow: 5px 5px 5px #A4A4A4;
+  // -webkit-box-shadow: 5px 5px 5px #A4A4A4;
+  // -moz-box-shadow: 5px 5px 5px #A4A4A4;
+  // box-shadow: 5px 5px 5px #A4A4A4;
   padding-left: 35px;
   margin-top: 5%;
   font-size: large;
-  background: #2ECC71;
+  background:  rgba(255, 255, 255, 0);
   color: white;
 }
 
@@ -42,8 +42,12 @@
     padding: 12px 5px;
     margin: 8px 0;
     display: inline-block;
-    border: 1px solid #0431B4;
+    border: 1px solid white;
     border-radius: 6px;
     box-sizing: border-box;
-    color: #0431B4;
+    color: white;
+}
+
+.content-back {
+    --background: linear-gradient(to right,#F2262F,#F90914,#9D060D);
 }

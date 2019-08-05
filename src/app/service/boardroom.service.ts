@@ -15,6 +15,13 @@ export class BoardroomService {
 
   }
 
+  getEvents(bdno){
+    return this.http.post(this.URL + 'getEvents', bdno, {});
+  }
+
+  // getList(){
+  //   return this.http.post(this.URL + 'getEvents', {}, {});
+  // }
 
 
 }

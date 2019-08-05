@@ -19,6 +19,7 @@ export class CalendarBookPage implements OnInit {
   bdName: any;
   monthName: any;
   bdno: any;
+  savedStartTimes: any = {};
 
 
   event = {
@@ -39,7 +40,7 @@ export class CalendarBookPage implements OnInit {
     mode: 'month',
     currentDate: new Date(),
     currentMonth: new Date().getMonth(),
-    
+
   };
 
   @ViewChild(CalendarComponent, { static: true }) myCal: CalendarComponent;
@@ -50,29 +51,44 @@ export class CalendarBookPage implements OnInit {
     console.log(this.calendar.currentMonth);
     this.activatedRoute.queryParams.subscribe(params => {
       this.selectedBdRoom = params;
-
-
     });
 
     console.log(this.selectedBdRoom);
     if (this.selectedBdRoom.boardRoom == "1") {
       this.bdName = "Board Room 1";
-      this.bdno=1;
+      this.bdno = 1;
     } else {
       this.bdName = "Board Room 2";
-      this.bdno=2;
+      this.bdno = 2;
     }
 
     console.log(this.bdName);
     this.resetEvent();
-
-    // this.monthNum[0] = "January";
-
     this.getMonthName();
-
-
-
+    this.receiveEvents();
   }
+
+  receiveEvents() {
+    let data = { bdno: this.bdno };
+    this.boardroomService.getEvents(data).then(async res => {
+      let data = JSON.parse(res.data);
+      data.events.forEach(element => {
+        element.startTime = new Date(Number(element.startTime));
+        element.endTime = new Date(Number(element.endTime));
+        element.bookBy = element.person;
+       
+       // this.savedStartTimes = element.startTime;
+      });
+
+
+      this.eventSource = data.events;
+      console.log(this.eventSource);
+    }).catch(error => {
+      //alert(JSON.stringify(error));
+
+    });
+  }
+
 
   resetEvent() {
     this.event = {
@@ -94,7 +110,7 @@ export class CalendarBookPage implements OnInit {
       endTime: new Date(this.event.endTime),
       allDay: this.event.allDay,
       desc: this.event.desc
-      
+
     }
 
     if (eventCopy.allDay) {
@@ -105,31 +121,45 @@ export class CalendarBookPage implements OnInit {
       eventCopy.endTime = new Date(Date.UTC(end.getUTCFullYear(), end.getUTCMonth(), end.getUTCDate() + 1));
     }
 
-    if((eventCopy.startTime < this.calendar.currentDate) || (eventCopy.startTime> eventCopy.endTime)){
+    if ((eventCopy.startTime < this.calendar.currentDate) || (eventCopy.startTime > eventCopy.endTime)) {
       this.TimeValidateMsg();
-    }else{
+    } else {
       this.eventSource.push(eventCopy);
-      this.myCal.loadEvents();
+      let data = {
+        "bdno": this.bdno,
+        "title": eventCopy.title,
+        "person": eventCopy.bookBy,
+        "description": eventCopy.desc,
+        "startTime": eventCopy.startTime.getTime(),
+        "endTime": eventCopy.endTime.getTime()
+      }
+
+
+
+      this.boardroomService.submitEvent(data).then(async res => {
+        console.log(res);
+        
+        let data = JSON.parse(res.data);
+        if (data.sno === 200) {
+          this.successMsg();
+          this.myCal.loadEvents();
+
+        }else{
+          this.notSavedMsg();
+        }
+
+      }).catch(error => {
+        //alert(JSON.stringify(error));
+
+      });
+      
+
     }
-   
+
     this.resetEvent();
-    console.log(this.bdno,eventCopy.title,eventCopy.bookBy,eventCopy.desc,eventCopy.startTime,eventCopy.endTime);
+    console.log(this.bdno, eventCopy.title, eventCopy.bookBy, eventCopy.desc, eventCopy.startTime, eventCopy.endTime);
 
-    let data = {
-      "bdno": this.bdno,
-      "title": eventCopy.title,
-      "person": eventCopy.bookBy,
-      "description": eventCopy.desc,
-      "startTime": eventCopy.startTime.getTime(),
-      "endTime": eventCopy.endTime.getTime()
-    }
 
-    this.boardroomService.submitEvent(data).then(async res => {
-
-    }).catch(error => {
-      //alert(JSON.stringify(error));
-     
-    });
 
   }
 
@@ -140,7 +170,7 @@ export class CalendarBookPage implements OnInit {
     this.calendar.currentMonth = this.calendar.currentMonth + 1;
     this.getMonthName();
 
-    
+
   }
 
   back() {
@@ -148,7 +178,7 @@ export class CalendarBookPage implements OnInit {
     swiper.slidePrev();
     this.calendar.currentMonth = this.calendar.currentMonth - 1;
     this.getMonthName();
-    
+
   }
 
   // Change between month/week/day
@@ -225,15 +255,39 @@ export class CalendarBookPage implements OnInit {
   }
 
 
-  async TimeValidateMsg(){
+  async TimeValidateMsg() {
     const alert = await this.alertCtrl.create({
-          header: 'Wrong Time!',
-         
-          message: 'Time selection went wrong. Please do not select a past date or time !!',
-          buttons: ['OK']
-        });
-    
-        await alert.present();
+      header: 'Wrong Time!',
+
+      message: 'Time selection went wrong. Please do not select a past date or time !!',
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  }
+
+
+  async notSavedMsg() {
+    const alert = await this.alertCtrl.create({
+      header: 'Time already Exists!',
+
+      message: 'Please book the board room on another time',
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  }
+
+
+  async successMsg() {
+    const alert = await this.alertCtrl.create({
+      header: 'Done!',
+
+      message: 'You have book the BoardRoom!',
+      buttons: ['OK']
+    });
+
+    await alert.present();
   }
 
 
