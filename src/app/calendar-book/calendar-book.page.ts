@@ -211,7 +211,13 @@ export class CalendarBookPage implements OnInit {
       header: event.title + ' by ' + event.bookBy,
       subHeader: event.desc,
       message: 'From: ' + start + '<br><br>To: ' + end,
-      buttons: ['OK']
+      buttons: [ {
+        text: 'Ok',
+        handler: () => {
+          //console.log('Confirm Ok');
+          this.router.navigate(['booking-list']);
+        }
+      }]
     });
     alert.present();
   }
