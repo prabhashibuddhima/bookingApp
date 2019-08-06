@@ -20,6 +20,7 @@ export class CalendarBookPage implements OnInit {
   monthName: any;
   bdno: any;
   savedStartTimes: any = {};
+  evparams: any = {}
 
 
   event = {
@@ -207,16 +208,29 @@ export class CalendarBookPage implements OnInit {
     let start = formatDate(event.startTime, 'medium', this.locale);
     let end = formatDate(event.endTime, 'medium', this.locale);
 
+    this.evparams = {
+      "bdno": this.bdno,
+      "title": event.title,
+      "bookBy": event.bookBy,
+      "description": event.description,
+      "startTime": start,
+      "endTime": end
+    }
+
     const alert = await this.alertCtrl.create({
       header: event.title + ' by ' + event.bookBy,
       subHeader: event.desc,
       message: 'From: ' + start + '<br><br>To: ' + end,
       buttons: [ {
-        text: 'Ok',
+        text: 'Request to Change',
         handler: () => {
-          //console.log('Confirm Ok');
-          this.router.navigate(['booking-list']);
+          console.log(this.evparams);
+          this.router.navigate(['booking-list'], { queryParams: this.evparams });
         }
+      },{
+        text: 'Ok',
+        role: 'ok'
+        
       }]
     });
     alert.present();
