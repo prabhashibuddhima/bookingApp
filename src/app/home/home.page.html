@@ -3,7 +3,8 @@
     <div style="width:97%; margin-left: 1%">
       <input type="radio" name="checkbox" id="checkbox1" value="bdroom1">
       <label align="center" class="tbox" for="checkbox1" style="width:100%;color:  whitesmoke" (click)="brSelect(1)">
-        Board Room 1
+        Board Room 1 <br>
+        (Media)
 
 
       </label>
@@ -12,7 +13,8 @@
     <div style="width:97%; margin-left: 1%">
       <input type="radio" name="checkbox" id="checkbox2" value="bdroom2" >
       <label align="center" class="tbox" for="checkbox2" style="width:100%;color:  whitesmoke" (click)="brSelect(2)">
-        Board Room 2
+        Board Room 2 <br>
+        (Neo)
 
 
       </label>
@@ -20,8 +22,8 @@
 
 
     <div style="margin-top: 30%" align="center">
-      <div  style="margin-left: 5%; width: 85%; float: left" class="btnmargin">
-          <ion-label (click)="goToBooking()">
+      <div  style="margin-left: 5%; width: 85%; float: left" class="btnmargin" (click)="goToBooking()">
+          <ion-label>
               Book Now
             </ion-label>
       </div>

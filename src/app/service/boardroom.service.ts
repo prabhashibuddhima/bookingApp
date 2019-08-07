@@ -9,6 +9,9 @@ export class BoardroomService {
   URL = environment.back_end_URL
   constructor(private http: HTTP) { }
 
+  register(data) {
+    return this.http.post(this.URL+'sendUserData', data, {});
+  }
 
   submitEvent(data) {
     return this.http.post(this.URL + 'sendData', data, {});

@@ -1,0 +1,121 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home" style="color:white"></ion-back-button>
+    </ion-buttons>
+    <ion-title align="center">Register</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form  [formGroup]="regForm" (ngSubmit)="registerData()">
+
+    <ion-grid style="margin-top:7%">
+      <ion-row>
+        <ion-col>
+          <div align="center" style="width:100%; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; font-size: 2em">
+            <b>Please Enter Your Details</b>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-label>Profile Photo</ion-label>
+          <ion-item class="tbox" style="margin-top: 5%">
+            <ion-label *ngIf="!profileImage" style="color:#BDBDBD"></ion-label>
+            <img *ngIf="profileImage" [src]="profileImage" alt="Profile Image" width="300" />
+          </ion-item>
+          <ion-item>
+            <ion-button (click)="getImage('profile')">Browse</ion-button>
+            <ion-button (click)="getCamera('profile')">Camera</ion-button>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+
+          <ion-item style="width: 95%">
+            <ion-label position="floating">First Name</ion-label>
+            <ion-input id="firstName" type="text" formControlName="firstName" [(ngModel)]="firstName" name="firstName" required></ion-input>
+          </ion-item>
+          <ion-item *ngIf="regForm != null && !regForm.get('firstName').valid && regForm.get('firstName').touched"
+            lines="none">
+            <ion-label color="danger">
+              Please Enter Your First Name
+            </ion-label>
+          </ion-item>
+
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+
+          <ion-item style="width: 95%">
+            <ion-label position="floating">Last Name</ion-label>
+            <ion-input id="lastName" type="text" formControlName="lastName" [(ngModel)]="lastName"  name="lastName"required></ion-input>
+          </ion-item>
+          <ion-item *ngIf="regForm != null && !regForm.get('lastName').valid && regForm.get('lastName').touched" lines="none">
+            <ion-label color="danger">
+              Please Enter Your Last Name
+            </ion-label>
+          </ion-item>
+
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+
+          <ion-item style="width: 95%">
+            <ion-label position="floating">Email</ion-label>
+            <ion-input id="email" type="email" formControlName="email" [(ngModel)]="email" name="email" required></ion-input>
+          </ion-item>
+          <ion-item *ngIf="regForm != null && !regForm.get('email').valid && regForm.get('email').touched && regForm.get('email').value"
+            lines="none">
+            <ion-label   color="danger">Please Enter A Valid Email
+            </ion-label>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+
+          <ion-item style="width: 95%">
+            <ion-label position="floating">Password</ion-label>
+            <ion-input id="password" type="password" formControlName="password" [(ngModel)]="password" name="password" required></ion-input>
+          </ion-item>
+          <ion-item *ngIf="regForm != null && regForm.get('password').valid && regForm.get('password').touched && !regForm.get('password').valid"
+            lines="none">
+            <ion-label>
+              Please Enter A Password
+            </ion-label>
+          </ion-item>
+
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+
+          <ion-item style="width: 95%">
+            <ion-label position="floating">Confirm Password</ion-label>
+            <ion-input id="repassword" type="password" formControlName="repassword" [(ngModel)]="repassword" name="repassword" required></ion-input>
+          </ion-item>
+          <ion-item *ngIf="regForm != null && regForm.get('repassword').valid && regForm.get('repassword').touched && !regForm.get('repassword').valid"
+            lines="none">
+            <ion-label>
+              Please Confirm The Password
+            </ion-label>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row style="margin-top:8%">
+        <ion-col align="center">
+          <ion-button style="width: 95%" type="submit" [disabled]="firstName == null || lastName == null || email == null || password == null || repassword == null || !regForm.get('email').valid">
+            Register
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+  </form>
+
+</ion-content>
