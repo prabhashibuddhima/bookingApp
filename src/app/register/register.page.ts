@@ -15,7 +15,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 })
 export class RegisterPage implements OnInit {
   regForm: FormGroup;
-  registerForm: FormGroup;
+  // registerForm: FormGroup;
   profileImage: any;
   profileImageURI: any;
   regSubmit: any;
@@ -29,15 +29,16 @@ export class RegisterPage implements OnInit {
 
   ngOnInit() {
 
-   this.regSubmit = true;
+   //this.regSubmit = true;
 
-   this.registerForm = new FormGroup({
-    firstName: new FormControl(), 
-    lastName: new FormControl(), 
-    email: new FormControl(),
-    password: new FormControl(),
-    repassword: new FormControl() 
-  });
+  //  this.registerForm = new FormGroup({
+  //   firstName: new FormControl(), 
+  //   lastName: new FormControl(), 
+  //   email: new FormControl(),
+  //   password: new FormControl(),
+  //   repassword: new FormControl() 
+  // });
+  
 
     this.regForm = this.formBuilder.group({
       firstName: ['', Validators.required],
@@ -62,7 +63,7 @@ export class RegisterPage implements OnInit {
     if(this.password != this.repassword) {
       this.passwordAlert();
     }else{
-      this.regSubmit = false;
+      //this.regSubmit = false;
       let data = {
         "firstName": this.firstName,
         "lastName": this.lastName,
@@ -81,14 +82,18 @@ export class RegisterPage implements OnInit {
         
 
           this.successAlert();
-          this.navCtrl.navigateRoot('/home');
+          this.navCtrl.navigateRoot('/login');
 
-        } else {
+        } else if(data.sno === 500){
+          this.emailExists();
+        }else{
           console.log('server err');
           this.serverAlert();
         }
+        this.regForm.reset();
       }).catch(error => {
         //alert(JSON.stringify(error));
+        this.regForm.reset();
         this.serverAlert();
       });
     
@@ -174,6 +179,16 @@ export class RegisterPage implements OnInit {
     const alert = await this.alertController.create({
      
       message: 'Please Enter all the fields',
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  }
+
+  async emailExists() {
+    const alert = await this.alertController.create({
+     
+      message: 'Your email is already exists!',
       buttons: ['OK']
     });
 

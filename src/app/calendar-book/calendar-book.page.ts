@@ -1,3 +1,4 @@
+import { element } from 'protractor';
 import { BoardroomService } from './../service/boardroom.service';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -19,8 +20,12 @@ export class CalendarBookPage implements OnInit {
   bdName: any;
   monthName: any;
   bdno: any;
+  uEmail: any;
+  uId: any;
   savedStartTimes: any = {};
-  evparams: any = {}
+  evparams: any = {};
+  uFullName: any;
+  trueUser: any;
 
 
   event = {
@@ -55,6 +60,7 @@ export class CalendarBookPage implements OnInit {
     });
 
     console.log(this.selectedBdRoom);
+   
     if (this.selectedBdRoom.boardRoom == "1") {
       this.bdName = "Board Room 1";
       this.bdno = 1;
@@ -63,7 +69,11 @@ export class CalendarBookPage implements OnInit {
       this.bdno = 2;
     }
 
-    console.log(this.bdName);
+    
+   // this.uEmail = this.selectedBdRoom.email;
+   //this.uId = this.selectedBdRoom.id;
+   this.uFullName = this.selectedBdRoom.username;
+   console.log(this.uFullName);
     this.resetEvent();
     this.getMonthName();
     this.receiveEvents();
@@ -77,6 +87,9 @@ export class CalendarBookPage implements OnInit {
         element.startTime = new Date(Number(element.startTime));
         element.endTime = new Date(Number(element.endTime));
         element.bookBy = element.person;
+        element.email = element.email;
+
+        
        
        // this.savedStartTimes = element.startTime;
       });
@@ -94,7 +107,7 @@ export class CalendarBookPage implements OnInit {
   resetEvent() {
     this.event = {
       title: '',
-      bookBy: '',
+      bookBy: this.uFullName,
       desc: '',
       startTime: new Date().toISOString(),
       endTime: new Date().toISOString(),
@@ -127,12 +140,15 @@ export class CalendarBookPage implements OnInit {
     } else {
       this.eventSource.push(eventCopy);
       let data = {
+        
         "bdno": this.bdno,
         "title": eventCopy.title,
         "person": eventCopy.bookBy,
         "description": eventCopy.desc,
         "startTime": eventCopy.startTime.getTime(),
-        "endTime": eventCopy.endTime.getTime()
+        "endTime": eventCopy.endTime.getTime(),
+        "email": this.selectedBdRoom.email,
+        "id": this.selectedBdRoom.id
       }
 
 
@@ -208,13 +224,23 @@ export class CalendarBookPage implements OnInit {
     let start = formatDate(event.startTime, 'medium', this.locale);
     let end = formatDate(event.endTime, 'medium', this.locale);
 
+    if(this.selectedBdRoom.username == event.bookBy){
+      this.trueUser = true;
+    }else{
+      this.trueUser = false;
+    }
+    console.log(event.email);
     this.evparams = {
       "bdno": this.bdno,
       "title": event.title,
       "bookBy": event.bookBy,
       "description": event.description,
       "startTime": start,
-      "endTime": end
+      "endTime": end,
+      "trueUser": this.trueUser,
+      "sender": this.selectedBdRoom.email,
+      "receiver": event.email
+
     }
 
     const alert = await this.alertCtrl.create({

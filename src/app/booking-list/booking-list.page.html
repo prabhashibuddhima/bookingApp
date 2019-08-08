@@ -8,14 +8,21 @@
 </ion-header>
 
 
-<ion-content>
+<ion-content *ngIf="reqUser=='true'">
+
+
+
+</ion-content>
+
+
+<ion-content *ngIf="reqUser=='false'">
   <ion-item>
     <ion-label>
       Board Room :
     </ion-label>
-    <ion-input>
+    <ion-label>
       {{selectedBdNo}}
-    </ion-input>
+    </ion-label>
 
   </ion-item>
 
@@ -23,9 +30,9 @@
     <ion-label>
       Title :
     </ion-label>
-    <ion-input>
+    <ion-label>
       {{selectedTitle}}
-    </ion-input>
+    </ion-label>
 
   </ion-item>
 
@@ -33,9 +40,9 @@
     <ion-label>
       Book By :
     </ion-label>
-    <ion-input>
+    <ion-label>
       {{selectedPerson}}
-    </ion-input>
+    </ion-label>
 
   </ion-item>
 
@@ -43,9 +50,9 @@
     <ion-label>
       Description :
     </ion-label>
-    <ion-input>
+    <ion-label>
       {{selectedDesc}}
-    </ion-input>
+    </ion-label>
 
   </ion-item>
 
@@ -53,9 +60,9 @@
     <ion-label>
       Start Time :
     </ion-label>
-    <ion-input>
+    <ion-label>
       {{selectedStartTime}}
-    </ion-input>
+    </ion-label>
 
   </ion-item>
 
@@ -63,20 +70,18 @@
     <ion-label>
       End Time :
     </ion-label>
-    <ion-input>
+    <ion-label>
       {{selectedEndTime}}
-    </ion-input>
+    </ion-label>
 
   </ion-item>
 
-  <div  align="center">
-      <div  style="margin-left: 5%; width: 85%; float: left">
-          <ion-button>
-            Change Booking
-          </ion-button>
-      </div>
-     
+  <div align="center">
+    <div style="margin-left: 5%; width: 85%; float: left" (click)="sendReq()">
+      <ion-button>
+        Request to Change
+      </ion-button>
     </div>
 
-
+  </div>
 </ion-content>

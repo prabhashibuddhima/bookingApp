@@ -17,8 +17,9 @@ export class BookingListPage implements OnInit {
   selectedDesc: any;
   selectedStartTime: any;
   selectedEndTime: any;
+  reqUser: any;
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute, private alertCtrl: AlertController,private boardroomService: BoardroomService) { }
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, private alertCtrl: AlertController, private boardroomService: BoardroomService) { }
 
   ngOnInit() {
     this.activatedRoute.queryParams.subscribe(evparams => {
@@ -27,16 +28,53 @@ export class BookingListPage implements OnInit {
 
     console.log(this.selectedData);
     this.selectedBdNo = this.selectedData.bdno;
-    this.selectedTitle =this.selectedData.title;
+    this.selectedTitle = this.selectedData.title;
     this.selectedPerson = this.selectedData.bookBy;
-    this.selectedDesc = this. selectedData.description;
+    this.selectedDesc = this.selectedData.description;
     this.selectedStartTime = this.selectedData.startTime;
     this.selectedEndTime = this.selectedData.endTime;
+    this.reqUser = this.selectedData.trueUser;
 
+    console.log(this.reqUser);
 
-    
 
   }
 
+
+  sendReq() {
+
+    let data = {
+      "bdno": this.selectedBdNo,
+      "startTime": this.selectedStartTime,
+      "endTime": this.selectedEndTime,
+      "sender": this.selectedData.sender,
+      "receiver": this.selectedData.receiver,
+      
+
+
+    }
+
+    this.boardroomService.sendRequest(data).then(async res => {
+      let data = JSON.parse(res.data);
+      if (data.sno === 200) {
+
+        console.log('gotcha');
+        // await this.boardroomService.upload(r.id, 'profileImage', this.profileImageURI);
+
+
+
+       
+
+      }  else {
+        console.log('400');
+       
+      }
+      
+    }).catch(error => {
+      //alert(JSON.stringify(error));
+      console.log('server err');
+    });
+
+  }
 
 }

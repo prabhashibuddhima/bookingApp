@@ -22,6 +22,10 @@ export class BoardroomService {
     return this.http.post(this.URL + 'getEvents', bdno, {});
   }
 
+  sendRequest(data){
+    return this.http.post(this.URL+'requestChange', data, {});
+  }
+
   // getList(){
   //   return this.http.post(this.URL + 'getEvents', {}, {});
   // }

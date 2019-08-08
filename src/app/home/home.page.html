@@ -1,5 +1,9 @@
-<ion-content class="content-back"> 
-  <div style="margin-top: 40%">
+<ion-content class="content-back">
+
+
+
+
+  <div style="margin-top: 20%">
     <div style="width:97%; margin-left: 1%">
       <input type="radio" name="checkbox" id="checkbox1" value="bdroom1">
       <label align="center" class="tbox" for="checkbox1" style="width:100%;color:  whitesmoke" (click)="brSelect(1)">
@@ -11,7 +15,7 @@
     </div>
 
     <div style="width:97%; margin-left: 1%">
-      <input type="radio" name="checkbox" id="checkbox2" value="bdroom2" >
+      <input type="radio" name="checkbox" id="checkbox2" value="bdroom2">
       <label align="center" class="tbox" for="checkbox2" style="width:100%;color:  whitesmoke" (click)="brSelect(2)">
         Board Room 2 <br>
         (Neo)
@@ -22,18 +26,25 @@
 
 
     <div style="margin-top: 30%" align="center">
-      <div  style="margin-left: 5%; width: 85%; float: left" class="btnmargin" (click)="goToBooking()">
-          <ion-label>
-              Book Now
-            </ion-label>
+      <div style="margin-left: 5%; width: 85%;" class="btnmargin" (click)="goToBooking()">
+        <ion-label>
+          Book Now
+        </ion-label>
       </div>
-     
+
       <!-- <div style="margin-left:3%; width: 45%; float: left" class="btnmargin">
           <ion-label >
               Booking List
           </ion-label>
       </div>
        -->
+    </div>
+
+    <div style="margin-top: 20%">
+      <ion-label (click)="logout()" style="color:white" slot="end">
+        <ion-icon slot="start" name="exit"></ion-icon>
+        Logout
+      </ion-label>
     </div>
   </div>
 
