@@ -18,6 +18,7 @@ export class BookingListPage implements OnInit {
   selectedStartTime: any;
   selectedEndTime: any;
   reqUser: any;
+  btnDisabled: any;
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private alertCtrl: AlertController, private boardroomService: BoardroomService) { }
 
@@ -25,7 +26,7 @@ export class BookingListPage implements OnInit {
     this.activatedRoute.queryParams.subscribe(evparams => {
       this.selectedData = evparams;
     });
-
+    //this.btnDisabled = true;
     console.log(this.selectedData);
     this.selectedBdNo = this.selectedData.bdno;
     this.selectedTitle = this.selectedData.title;
@@ -61,7 +62,7 @@ export class BookingListPage implements OnInit {
         console.log('gotcha');
         // await this.boardroomService.upload(r.id, 'profileImage', this.profileImageURI);
 
-
+        this.btnDisabled = false;
 
        
 
@@ -75,6 +76,7 @@ export class BookingListPage implements OnInit {
       console.log('server err');
     });
 
+    this
   }
 
 }

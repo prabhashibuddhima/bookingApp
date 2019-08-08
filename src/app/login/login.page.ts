@@ -6,6 +6,7 @@ import { Storage } from '@ionic/storage';
 import { AlertController, NavController} from '@ionic/angular';
 import { AuthenticationService } from '../service/authentication.service';
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -28,7 +29,10 @@ export class LoginPage implements OnInit {
       password: ['', Validators.required],
      
     });
+    
   }
+
+  
 
   loginData(){
     if (this.loginForm.invalid) {
@@ -88,7 +92,7 @@ export class LoginPage implements OnInit {
    
 
     this.router.navigate(['home'], { queryParams: param });
-
+    
 
   }
 

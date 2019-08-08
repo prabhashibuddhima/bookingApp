@@ -1,0 +1,55 @@
+<ion-header>
+    <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/home" style="color:white"></ion-back-button>
+      </ion-buttons>
+      <ion-title align="center">Requests</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+          <ion-list>
+              <ion-item>
+                <ion-label text-wrap>
+                 Board Room
+                </ion-label>
+                <ion-label text-wrap>
+                  Start Time
+                 </ion-label>
+                 <ion-label text-wrap>
+                 End Time
+                 </ion-label>
+                 <ion-label text-wrap>
+                  Sender
+                 </ion-label>
+              </ion-item>
+            </ion-list>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+          <ion-list>
+              <ion-item *ngFor="let n of eventSource">
+                <ion-label text-wrap>
+                 {{n.bdno}}
+                </ion-label>
+                <ion-label text-wrap>
+                  {{n.startTime}}
+                 </ion-label>
+                 <ion-label text-wrap>
+                  {{n.endTime}}
+                 </ion-label>
+                 <ion-label text-wrap>
+                  {{n.sender}}
+                 </ion-label>
+              </ion-item>
+            </ion-list> 
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  
+
+</ion-content>

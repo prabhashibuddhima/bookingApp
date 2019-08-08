@@ -30,5 +30,8 @@ export class BoardroomService {
   //   return this.http.post(this.URL + 'getEvents', {}, {});
   // }
 
+  checkReq(data){
+    return this.http.post(this.URL + 'getRequests', data, {});
+  }
 
 }

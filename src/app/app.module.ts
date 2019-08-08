@@ -12,7 +12,8 @@ import { IonicStorageModule } from '@ionic/storage';
 import { Camera, CameraOptions, CameraPopoverOptions } from '@ionic-native/camera/ngx'; 
 import { File } from '@ionic-native/file/ngx';
 import { FilePath } from '@ionic-native/file-path/ngx';
-
+import { OneSignal } from '@ionic-native/onesignal/ngx';
+import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,6 +24,8 @@ import { FilePath } from '@ionic-native/file-path/ngx';
     HTTP,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    OneSignal,
+    LocalNotifications,
     Camera,
     File,
      FileTransfer,
