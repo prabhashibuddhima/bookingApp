@@ -1,14 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { BoardroomService } from './../service/boardroom.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AlertController } from '@ionic/angular';
-
+import { CalendarComponent } from 'ionic2-calendar/calendar';
 
 @Component({
   selector: 'app-booking-list',
   templateUrl: './booking-list.page.html',
   styleUrls: ['./booking-list.page.scss'],
 })
+
 export class BookingListPage implements OnInit {
 
   selectedData: any = {};
@@ -22,6 +23,15 @@ export class BookingListPage implements OnInit {
   btnDisabled: any;
   minDate = new Date().toISOString();
 
+  calendar = {
+    mode: 'month',
+    currentDate: new Date(),
+    currentMonth: new Date().getMonth(),
+
+  };
+
+
+  @ViewChild(CalendarComponent, { static: true }) myCal: CalendarComponent;
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private alertCtrl: AlertController, private boardroomService: BoardroomService) { }
 
@@ -46,10 +56,60 @@ export class BookingListPage implements OnInit {
 
   changeEvent() {
 
-    console.log(this.selectedStartTime);
+    console.log(this.calendar.currentDate);
     let sTime = new Date(this.selectedStartTime);
-    let eTime =  new Date(this.selectedEndTime);
-    console.log(sTime.getTime());
+    let eTime = new Date(this.selectedEndTime);
+    //this.calendar.currentDate = new Date();
+    if ((this.selectedStartTime < this.calendar.currentDate) || (this.selectedStartTime > this.selectedEndTime)) {
+      this.TimeValidateMsg();
+    } else {
+      console.log(sTime.getTime());
+      let data = {
+        "bdno": this.selectedBdNo,
+        "title": this.selectedTitle,
+        "person": this.selectedPerson,
+        "description": this.selectedDesc,
+        "startTime": sTime.getTime(),
+        "endTime": eTime.getTime(),
+        "email": this.selectedData.email,
+        "id": this.selectedData.id
+
+      }
+
+      this.boardroomService.updateEvent(data).then(async res => {
+        let data = JSON.parse(res.data);
+        if (data.sno === 200) {
+
+          console.log('updated');
+          
+          this.successMsg();
+          this.router.navigate(['calendar-book']);
+
+
+
+
+        } else {
+          console.log('400');
+          this.errorMsg();
+          this.router.navigate(['calendar-book']);
+
+        }
+
+      }).catch(error => {
+        //alert(JSON.stringify(error));
+        console.log('server err');
+        this.serverAlert();
+
+      });
+    }
+
+  }
+
+  deleteEvent() {
+
+    let sTime = new Date(this.selectedStartTime);
+    let eTime = new Date(this.selectedEndTime);
+
     let data = {
       "bdno": this.selectedBdNo,
       "title": this.selectedTitle,
@@ -57,26 +117,26 @@ export class BookingListPage implements OnInit {
       "description": this.selectedDesc,
       "startTime": sTime.getTime(),
       "endTime": eTime.getTime(),
-      "email": this.selectedData.email ,
+      "email": this.selectedData.email,
       "id": this.selectedData.id
 
     }
 
-    this.boardroomService.updateEvent(data).then(async res => {
+    this.boardroomService.deleteEvent(data).then(async res => {
       let data = JSON.parse(res.data);
       if (data.sno === 200) {
 
-        console.log('updated');
-        // await this.boardroomService.upload(r.id, 'profileImage', this.profileImageURI);
-        this.successMsg();
-        this.router.navigate(['calendar-book']);
+        console.log('deleted');
         
+        this.successDelete();
+        this.router.navigate(['home']);
+
 
 
 
       } else {
         console.log('400');
-        this.errorMsg();
+        this.deleteErr();
         this.router.navigate(['calendar-book']);
 
       }
@@ -84,27 +144,11 @@ export class BookingListPage implements OnInit {
     }).catch(error => {
       //alert(JSON.stringify(error));
       console.log('server err');
+      this.serverAlert();
+
     });
 
 
-  }
-
-  deleteEvent() {
-
-    let sTime = new Date(this.selectedStartTime);
-    let eTime =  new Date(this.selectedEndTime);
-    
-    let data = {
-      "bdno": this.selectedBdNo,
-      "title": this.selectedTitle,
-      "person": this.selectedPerson,
-      "description": this.selectedDesc,
-      "startTime": sTime.getTime(),
-      "endTime": eTime.getTime(),
-      "email": this.selectedData.email ,
-      "id": this.selectedData.id
-
-    }
 
   }
 
@@ -129,7 +173,7 @@ export class BookingListPage implements OnInit {
         // await this.boardroomService.upload(r.id, 'profileImage', this.profileImageURI);
 
         this.btnDisabled = false;
-
+        this.successReq();
 
 
       } else {
@@ -148,7 +192,7 @@ export class BookingListPage implements OnInit {
 
   async successMsg() {
     const alert = await this.alertCtrl.create({
-     // header: 'Done!',
+      // header: 'Done!',
 
       message: 'Event Successfully Updated!',
       buttons: ['OK']
@@ -159,7 +203,7 @@ export class BookingListPage implements OnInit {
 
   async errorMsg() {
     const alert = await this.alertCtrl.create({
-     // header: 'Done!',
+      // header: 'Done!',
 
       message: 'Update Failed! Try Again Later',
       buttons: ['OK']
@@ -177,4 +221,57 @@ export class BookingListPage implements OnInit {
 
     await alert.present();
   }
+
+  async successReq() {
+    const alert = await this.alertCtrl.create({
+      // header: 'Something went wrong!',
+      message: 'Request Successfully Sent!',
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  }
+
+  async wrongReq() {
+    const alert = await this.alertCtrl.create({
+
+      message: 'Cannot Send the request!',
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  }
+  async TimeValidateMsg() {
+    const alert = await this.alertCtrl.create({
+      header: 'Wrong Time!',
+
+      message: 'Time selection went wrong. Please do not select a past date or time !!',
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  }
+
+  async successDelete() {
+    const alert = await this.alertCtrl.create({
+      // header: 'Something went wrong!',
+      message: 'Event SuccessFully Deleted!',
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  }
+
+
+  async deleteErr() {
+    const alert = await this.alertCtrl.create({
+      
+      message: 'You Can not Delete this Event!',
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  }
+
+
 }

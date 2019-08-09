@@ -234,7 +234,7 @@ export class CalendarBookPage implements OnInit {
       "bdno": this.bdno,
       "title": event.title,
       "bookBy": event.bookBy,
-      "description": event.description,
+      "description": event.desc,
       "startTime": start,
       "endTime": end,
       "trueUser": this.trueUser,
