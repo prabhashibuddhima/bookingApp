@@ -5,7 +5,7 @@
   
   
   input[type="radio"]:checked + label {
-    background-color: #95040B ;
+    background-color: #E56C6C ;
     color: white;
   }
 
@@ -23,7 +23,7 @@
   margin: 8px 0;
   display: inline-block;
   border: 1px solid #E6E6E6;
-  border-radius: 4px;
+  border-radius: 75px;
   box-sizing: border-box;
   // -o-box-shadow: 5px 5px 5px #A4A4A4;
   // -khtml-box-shadow: 5px 5px 5px #A4A4A4;
@@ -38,7 +38,7 @@
 }
 
 .btnmargin{
-    width: 100%;
+    width: 33%;
     padding: 12px 5px;
     margin: 8px 0;
     display: inline-block;
@@ -49,5 +49,14 @@
 }
 
 .content-back {
-    --background: linear-gradient(to right,#F2262F,#F90914,#9D060D);
+    --background: #ee1c25;
+}
+
+
+ion-icon{
+  color: white;
+}
+
+ion-label{
+  color: white;
 }

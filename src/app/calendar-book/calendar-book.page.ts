@@ -239,7 +239,9 @@ export class CalendarBookPage implements OnInit {
       "endTime": end,
       "trueUser": this.trueUser,
       "sender": this.selectedBdRoom.email,
-      "receiver": event.email
+      "receiver": event.email,
+      "email": this.selectedBdRoom.email,
+      "id": this.selectedBdRoom.id 
 
     }
 

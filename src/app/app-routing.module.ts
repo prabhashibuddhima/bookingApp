@@ -4,13 +4,13 @@ import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'home', loadChildren: () => import('./home/home.module').then( m => m.HomePageModule), canActivate: [AuthGuard] },
+  { path: 'home', loadChildren: () => import('./home/home.module').then( m => m.HomePageModule), canActivate: [AuthGuard]  },
   { path: 'calendar-book', loadChildren: './calendar-book/calendar-book.module#CalendarBookPageModule', canActivate: [AuthGuard]  },
   { path: 'booking-list', loadChildren: './booking-list/booking-list.module#BookingListPageModule', canActivate: [AuthGuard]  },
   { path: 'register', loadChildren: './register/register.module#RegisterPageModule' },
   { path: 'first-page', loadChildren: './first-page/first-page.module#FirstPagePageModule' },
   { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
-  { path: 'notificatio-list', loadChildren: './notificatio-list/notificatio-list.module#NotificatioListPageModule' },
+  { path: 'notificatio-list', loadChildren: './notificatio-list/notificatio-list.module#NotificatioListPageModule', canActivate: [AuthGuard]  },
 ];
 
 @NgModule({

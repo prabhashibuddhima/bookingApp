@@ -78,30 +78,16 @@ export class HomePage {
   }
 
    ngOnInit(){
-    this.authService.getEmail().then((value) => {
-      if(!value)
-        this.authService.logoutAuthenticate();
-
-      this.email = value;
-    }).catch(error => {
-      console.log(error);
-      this.authService.logoutAuthenticate();
-    });
-
-     this.activatedRoute.queryParams.subscribe(uparams => {
-      this.loggedUser = uparams;
-    });
-
-    this.userEmail = this.loggedUser.email;
-    this.userID = this.loggedUser.id;
-    this.userFullName = this.loggedUser.username;
-
-    console.log( this.loggedUser.username);
-    this.checkRequests();
+    this.getAuth();
     
   }
 
   ionViewWillEnter(){
+    this.getAuth();
+    
+  }
+
+  getAuth(){
     this.authService.getEmail().then((value) => {
       if(!value)
         this.authService.logoutAuthenticate();
@@ -122,7 +108,6 @@ export class HomePage {
 
     console.log( this.userEmail);
     this.checkRequests();
-    
   }
 
   checkRequests(){

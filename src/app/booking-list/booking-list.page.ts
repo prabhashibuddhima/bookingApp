@@ -3,6 +3,7 @@ import { BoardroomService } from './../service/boardroom.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 
+
 @Component({
   selector: 'app-booking-list',
   templateUrl: './booking-list.page.html',
@@ -19,6 +20,8 @@ export class BookingListPage implements OnInit {
   selectedEndTime: any;
   reqUser: any;
   btnDisabled: any;
+  minDate = new Date().toISOString();
+
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private alertCtrl: AlertController, private boardroomService: BoardroomService) { }
 
@@ -37,10 +40,73 @@ export class BookingListPage implements OnInit {
     this.reqUser = this.selectedData.trueUser;
 
     console.log(this.reqUser);
+    console.log(this.selectedStartTime);
+
+  }
+
+  changeEvent() {
+
+    console.log(this.selectedStartTime);
+    let sTime = new Date(this.selectedStartTime);
+    let eTime =  new Date(this.selectedEndTime);
+    console.log(sTime.getTime());
+    let data = {
+      "bdno": this.selectedBdNo,
+      "title": this.selectedTitle,
+      "person": this.selectedPerson,
+      "description": this.selectedDesc,
+      "startTime": sTime.getTime(),
+      "endTime": eTime.getTime(),
+      "email": this.selectedData.email ,
+      "id": this.selectedData.id
+
+    }
+
+    this.boardroomService.updateEvent(data).then(async res => {
+      let data = JSON.parse(res.data);
+      if (data.sno === 200) {
+
+        console.log('updated');
+        // await this.boardroomService.upload(r.id, 'profileImage', this.profileImageURI);
+        this.successMsg();
+        this.router.navigate(['calendar-book']);
+        
+
+
+
+      } else {
+        console.log('400');
+        this.errorMsg();
+        this.router.navigate(['calendar-book']);
+
+      }
+
+    }).catch(error => {
+      //alert(JSON.stringify(error));
+      console.log('server err');
+    });
 
 
   }
 
+  deleteEvent() {
+
+    let sTime = new Date(this.selectedStartTime);
+    let eTime =  new Date(this.selectedEndTime);
+    
+    let data = {
+      "bdno": this.selectedBdNo,
+      "title": this.selectedTitle,
+      "person": this.selectedPerson,
+      "description": this.selectedDesc,
+      "startTime": sTime.getTime(),
+      "endTime": eTime.getTime(),
+      "email": this.selectedData.email ,
+      "id": this.selectedData.id
+
+    }
+
+  }
 
   sendReq() {
 
@@ -50,7 +116,7 @@ export class BookingListPage implements OnInit {
       "endTime": this.selectedEndTime,
       "sender": this.selectedData.sender,
       "receiver": this.selectedData.receiver,
-      
+
 
 
     }
@@ -64,19 +130,51 @@ export class BookingListPage implements OnInit {
 
         this.btnDisabled = false;
 
-       
 
-      }  else {
+
+      } else {
         console.log('400');
-       
+
       }
-      
+
     }).catch(error => {
       //alert(JSON.stringify(error));
       console.log('server err');
+      this.serverAlert();
     });
 
-    this
+
   }
 
+  async successMsg() {
+    const alert = await this.alertCtrl.create({
+     // header: 'Done!',
+
+      message: 'Event Successfully Updated!',
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  }
+
+  async errorMsg() {
+    const alert = await this.alertCtrl.create({
+     // header: 'Done!',
+
+      message: 'Update Failed! Try Again Later',
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  }
+
+  async serverAlert() {
+    const alert = await this.alertCtrl.create({
+      header: 'Something went wrong!',
+      message: 'Please try again later',
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  }
 }

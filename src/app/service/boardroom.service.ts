@@ -34,4 +34,13 @@ export class BoardroomService {
     return this.http.post(this.URL + 'getRequests', data, {});
   }
 
+
+  updateEvent(data){
+    return this.http.post(this.URL + 'updateEvents', data, {});
+  }
+
+  deleteEvent(data){
+    return this.http.post(this.URL + 'deleteEvents', data, {});
+  }
+
 }

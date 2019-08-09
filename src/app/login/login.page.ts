@@ -19,10 +19,11 @@ export class LoginPage implements OnInit {
   loggedEmail: any;
   loggedId: any;
   userName: any;
-
+  docsSubmit: any;
   constructor(private authService: AuthenticationService,private router: Router, private formBuilder: FormBuilder, private alertController: AlertController, private navCtrl: NavController) { }
 
   ngOnInit() {
+    this.docsSubmit = true;
     this.loginForm = this.formBuilder.group({
     
       email: ['', Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')],
@@ -35,11 +36,13 @@ export class LoginPage implements OnInit {
   
 
   loginData(){
+    
     if (this.loginForm.invalid) {
       this.emptyFields();
 
     }
     else {
+      this.docsSubmit = false;
       console.log(this.loginForm.value);
       console.log(this.email);
       console.log(this.password);
