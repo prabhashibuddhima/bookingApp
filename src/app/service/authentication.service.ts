@@ -12,7 +12,9 @@ import { environment } from '../../environments/environment';
 })
 export class AuthenticationService {
 
-  constructor(private storage: Storage, private http: HTTP,private router: Router) { }
+  constructor(private storage: Storage, private http: HTTP,private router: Router) {
+    
+   }
 
   getToken() {
     return this.storage.get('token');
@@ -20,6 +22,10 @@ export class AuthenticationService {
 
   getEmail() {
     return this.storage.get('email');
+  }
+  
+  getFullName(){
+    return this.storage.get('fullname');
   }
 
   getIsAuthentication() {
@@ -30,13 +36,19 @@ export class AuthenticationService {
     return this.storage.get('id');
   }
 
-  loginAuthenticate(email, isAuthentication, token, id) {
+  loginAuthenticate(email, isAuthentication, token, id,fullname) {
     this.storage.set("email", email);
     this.storage.set("isAuthentication", isAuthentication);
     this.storage.set("token", token);
     this.storage.set("id", id);
+    this.storage.set("fullname", fullname);
   }
 
+  requestsNumber(rlength){
+    this.storage.set("rlength", rlength);
+  }
+
+  
   logoutAuthenticate() {
     this.storage.set("email", "");
     this.storage.set("isAuthentication", false);

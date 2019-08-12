@@ -60,7 +60,7 @@ export class CalendarBookPage implements OnInit {
     });
 
     console.log(this.selectedBdRoom);
-   
+
     if (this.selectedBdRoom.boardRoom == "1") {
       this.bdName = "Board Room 1";
       this.bdno = 1;
@@ -69,11 +69,11 @@ export class CalendarBookPage implements OnInit {
       this.bdno = 2;
     }
 
-    
-   // this.uEmail = this.selectedBdRoom.email;
-   //this.uId = this.selectedBdRoom.id;
-   this.uFullName = this.selectedBdRoom.username;
-   console.log(this.uFullName);
+
+    // this.uEmail = this.selectedBdRoom.email;
+    //this.uId = this.selectedBdRoom.id;
+    this.uFullName = this.selectedBdRoom.username;
+    console.log(this.uFullName);
     this.resetEvent();
     this.getMonthName();
     this.receiveEvents();
@@ -89,9 +89,9 @@ export class CalendarBookPage implements OnInit {
         element.bookBy = element.person;
         element.email = element.email;
 
-        
-       
-       // this.savedStartTimes = element.startTime;
+
+
+        // this.savedStartTimes = element.startTime;
       });
 
 
@@ -140,7 +140,7 @@ export class CalendarBookPage implements OnInit {
     } else {
       this.eventSource.push(eventCopy);
       let data = {
-        
+
         "bdno": this.bdno,
         "title": eventCopy.title,
         "person": eventCopy.bookBy,
@@ -155,13 +155,14 @@ export class CalendarBookPage implements OnInit {
 
       this.boardroomService.submitEvent(data).then(async res => {
         console.log(res);
-        
+
         let data = JSON.parse(res.data);
         if (data.sno === 200) {
           this.successMsg();
           this.myCal.loadEvents();
+          
 
-        }else{
+        } else {
           this.notSavedMsg();
         }
 
@@ -169,11 +170,11 @@ export class CalendarBookPage implements OnInit {
         //alert(JSON.stringify(error));
 
       });
-      
 
+      this.resetEvent();
     }
 
-    this.resetEvent();
+
     console.log(this.bdno, eventCopy.title, eventCopy.bookBy, eventCopy.desc, eventCopy.startTime, eventCopy.endTime);
 
 
@@ -224,9 +225,9 @@ export class CalendarBookPage implements OnInit {
     let start = formatDate(event.startTime, 'medium', this.locale);
     let end = formatDate(event.endTime, 'medium', this.locale);
 
-    if(this.selectedBdRoom.username == event.bookBy){
+    if (this.selectedBdRoom.username == event.bookBy) {
       this.trueUser = true;
-    }else{
+    } else {
       this.trueUser = false;
     }
     console.log(event.email);
@@ -241,7 +242,7 @@ export class CalendarBookPage implements OnInit {
       "sender": this.selectedBdRoom.email,
       "receiver": event.email,
       "email": this.selectedBdRoom.email,
-      "id": this.selectedBdRoom.id 
+      "id": this.selectedBdRoom.id
 
     }
 
@@ -249,16 +250,16 @@ export class CalendarBookPage implements OnInit {
       header: event.title + ' by ' + event.bookBy,
       subHeader: event.desc,
       message: 'From: ' + start + '<br><br>To: ' + end,
-      buttons: [ {
+      buttons: [{
         text: 'Request to Change',
         handler: () => {
           console.log(this.evparams);
           this.router.navigate(['booking-list'], { queryParams: this.evparams });
         }
-      },{
+      }, {
         text: 'Ok',
         role: 'ok'
-        
+
       }]
     });
     alert.present();

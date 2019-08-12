@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, CanActivate, Router} from '@angular/router';
+import { ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, CanActivate, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Storage } from '@ionic/storage';
 import { AuthenticationService } from '../service/authentication.service';
@@ -7,7 +7,7 @@ import { AuthenticationService } from '../service/authentication.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate{
+export class AuthGuard implements CanActivate {
   constructor(private router: Router, private storage: Storage, private auth: AuthenticationService) { }
   canActivate(
     next: ActivatedRouteSnapshot,
@@ -27,5 +27,5 @@ export class AuthGuard implements CanActivate{
     });
 
   }
-  
+
 }

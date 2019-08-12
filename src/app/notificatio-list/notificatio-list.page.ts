@@ -28,7 +28,7 @@ export class NotificatioListPage implements OnInit {
       "email": this.reqs.email
     }
 
-    console.log(this.reqs.email);
+   
     console.error();
 
     this.boardroomService.checkReq(data).then(async res => {
@@ -36,7 +36,8 @@ export class NotificatioListPage implements OnInit {
     
 
       this.eventSource = data.events;
-      console.log(this.eventSource);
+      
+     // console.log(this.eventSource.length);
     }).catch(error => {
       console.log('server err');
     });

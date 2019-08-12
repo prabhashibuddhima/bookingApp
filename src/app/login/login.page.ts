@@ -57,7 +57,7 @@ export class LoginPage implements OnInit {
         let data = JSON.parse(res.data);
         if (data.sno === 200) {
           console.log(data);
-          this.authService.loginAuthenticate(this.loginForm.value.email, data.isAuthentication, data.token, data.id);
+          this.authService.loginAuthenticate(this.loginForm.value.email, data.isAuthentication, data.token, data.id, data.fullname);
           this.successAlert();
           
           this.loggedEmail = this.loginForm.value.email;
