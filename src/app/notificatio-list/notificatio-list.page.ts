@@ -24,6 +24,7 @@ export class NotificatioListPage implements OnInit {
 
     
   }
+  
 
   ionViewWillEnter(){
 

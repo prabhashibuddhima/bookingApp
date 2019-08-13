@@ -26,6 +26,8 @@ export class HomePage implements OnInit {
   reqBdRoom: any;
   noOfReqs: Number;
 
+  
+
 
   constructor(private storage: Storage, private plt: Platform, private localNotifications: LocalNotifications, private boardroomService: BoardroomService, private router: Router, private activatedRoute: ActivatedRoute, private alertController: AlertController, private authService: AuthenticationService) {
 
@@ -39,19 +41,21 @@ export class HomePage implements OnInit {
 
       this.localNotifications.on('trigger').subscribe(res => {
         let msg = res.data ? res.data.mydata : '';
-        
+
         // this.showAlert(res.title, res.text, msg);
       });
 
 
     });
 
-
+    let callReq = setInterval(() => {
+      this.checkRequests();
+    }, 10000);
   }
 
 
   goNotifications() {
-    
+
     let userparam = {
       "email": this.userEmail
     }
@@ -75,13 +79,13 @@ export class HomePage implements OnInit {
       title: 'Request Received!',
       text: 'Please Check the notifications!',
       data: { mydata: 'Check your notifications' },
-      trigger: { every: ELocalNotificationTriggerUnit.SECOND },
+      //trigger: { every: ELocalNotificationTriggerUnit.SECOND },
       foreground: true // Show the notification while app is open
     });
 
   }
 
-   ngOnInit() {
+  ngOnInit() {
 
     console.log(this.noOfReqs);
 
@@ -101,8 +105,8 @@ export class HomePage implements OnInit {
       this.userFullName = val;
     });
 
-     this.getAuth();
-     this.checkRequests();
+    this.getAuth();
+  //  this.checkRequests();
 
   }
 
@@ -132,8 +136,9 @@ export class HomePage implements OnInit {
     //this.userFullName = this.loggedUser.username;
 
 
-   
+
   }
+  
 
   checkRequests() {
     let data = {
@@ -144,31 +149,31 @@ export class HomePage implements OnInit {
       if (data.sno === 200) {
         if (this.noOfReqs == null) {
           this.noOfReqs = 0;
-          this.pushNotification();
           
+
         } else {
           if (data.rlength > this.noOfReqs) {
             console.log('there r reqs');
             this.pushNotification();
             this.authService.requestsNumber(data.rlength);
-  
+
             this.storage.get('rlength').then((val) => {
               this.noOfReqs = val;
-  
-  
+
+
             });
-  
-  
+
+
           } else if (data.rlength = this.noOfReqs) {
             console.log('equal reqs' + data.rlength);
-  
-  
+
+
           } else {
             console.log(data.rlength);
           }
-  
+
         }
-       
+
 
 
 
@@ -185,6 +190,8 @@ export class HomePage implements OnInit {
     });
 
   }
+
+  
   logout() {
     this.authService.logoutAuthenticate();
   }

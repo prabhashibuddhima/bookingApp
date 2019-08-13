@@ -10,7 +10,7 @@ const routes: Routes = [
   { path: 'register', loadChildren: './register/register.module#RegisterPageModule' },
   { path: 'first-page', loadChildren: './first-page/first-page.module#FirstPagePageModule' },
   { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
-  { path: 'notificatio-list', loadChildren: './notificatio-list/notificatio-list.module#NotificatioListPageModule', canActivate: [AuthGuard]  },
+  { path: 'notificatio-list', loadChildren: './notificatio-list/notificatio-list.module#NotificatioListPageModule'},
 ];
 
 @NgModule({
