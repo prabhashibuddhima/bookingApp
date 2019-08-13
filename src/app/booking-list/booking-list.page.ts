@@ -226,7 +226,12 @@ export class BookingListPage implements OnInit {
     const alert = await this.alertCtrl.create({
       // header: 'Something went wrong!',
       message: 'Request Successfully Sent!',
-      buttons: ['OK']
+      buttons: [{
+        text: 'Ok',
+        handler: () => {
+         
+          this.router.navigate(['calendar-book']);
+        }}]
     });
 
     await alert.present();
@@ -236,7 +241,12 @@ export class BookingListPage implements OnInit {
     const alert = await this.alertCtrl.create({
 
       message: 'Cannot Send the request!',
-      buttons: ['OK']
+      buttons: [{
+        text: 'Ok',
+        handler: () => {
+         
+          this.router.navigate(['calendar-book']);
+        }}]
     });
 
     await alert.present();

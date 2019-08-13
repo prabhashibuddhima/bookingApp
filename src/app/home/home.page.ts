@@ -16,9 +16,6 @@ import { Storage } from '@ionic/storage';
 export class HomePage implements OnInit {
   boardRoom: any;
   email: any;
-  // br1value: any;
-  // br2value: any;
-
   loggedUser: any = {};
   userEmail: any;
   userID: any;
@@ -27,7 +24,7 @@ export class HomePage implements OnInit {
   reqSTime: any;
   reqETime: any;
   reqBdRoom: any;
-  noOfReqs: Number = 0;
+  noOfReqs: Number;
 
 
   constructor(private storage: Storage, private plt: Platform, private localNotifications: LocalNotifications, private boardroomService: BoardroomService, private router: Router, private activatedRoute: ActivatedRoute, private alertController: AlertController, private authService: AuthenticationService) {
@@ -42,22 +39,24 @@ export class HomePage implements OnInit {
 
       this.localNotifications.on('trigger').subscribe(res => {
         let msg = res.data ? res.data.mydata : '';
+        
         // this.showAlert(res.title, res.text, msg);
       });
 
 
     });
-    this.getAuth();
+
 
   }
 
 
   goNotifications() {
+    
     let userparam = {
       "email": this.userEmail
     }
 
-
+    console.log(userparam);
     this.router.navigate(['notificatio-list'], { queryParams: userparam });
   }
 
@@ -76,16 +75,16 @@ export class HomePage implements OnInit {
       title: 'Request Received!',
       text: 'Please Check the notifications!',
       data: { mydata: 'Check your notifications' },
-     // trigger: { every: ELocalNotificationTriggerUnit.SECOND },
+      trigger: { every: ELocalNotificationTriggerUnit.SECOND },
       foreground: true // Show the notification while app is open
     });
 
   }
 
-  async ngOnInit() {
-    await this.getAuth();
-    console.log('home on init');
-    
+   ngOnInit() {
+
+    console.log(this.noOfReqs);
+
     this.storage.get('email').then((val) => {
 
       this.userEmail = val;
@@ -101,6 +100,9 @@ export class HomePage implements OnInit {
 
       this.userFullName = val;
     });
+
+     this.getAuth();
+     this.checkRequests();
 
   }
 
@@ -125,12 +127,12 @@ export class HomePage implements OnInit {
       this.loggedUser = uparams;
     });
 
-    // this.userEmail = this.loggedUser.email;
+    //this.userEmail = this.loggedUser.email;
     //this.userID = this.loggedUser.id;
     //this.userFullName = this.loggedUser.username;
 
 
-    this.checkRequests();
+   
   }
 
   checkRequests() {
@@ -140,26 +142,33 @@ export class HomePage implements OnInit {
     this.boardroomService.checkReq(data).then(async res => {
       let data = JSON.parse(res.data);
       if (data.sno === 200) {
-        if (data.rlength > this.noOfReqs) {
-          console.log('there r reqs');
+        if (this.noOfReqs == null) {
+          this.noOfReqs = 0;
           this.pushNotification();
-          this.authService.requestsNumber(data.rlength);
-
-          this.storage.get('rlength').then((val) => {
-            this.noOfReqs = val;
-
-
-          });
-
-
-        } else if (data.rlength = this.noOfReqs) {
-          console.log('equal reqs' + data.rlength);
-
-
+          
         } else {
-          console.log(data.rlength);
+          if (data.rlength > this.noOfReqs) {
+            console.log('there r reqs');
+            this.pushNotification();
+            this.authService.requestsNumber(data.rlength);
+  
+            this.storage.get('rlength').then((val) => {
+              this.noOfReqs = val;
+  
+  
+            });
+  
+  
+          } else if (data.rlength = this.noOfReqs) {
+            console.log('equal reqs' + data.rlength);
+  
+  
+          } else {
+            console.log(data.rlength);
+          }
+  
         }
-
+       
 
 
 
