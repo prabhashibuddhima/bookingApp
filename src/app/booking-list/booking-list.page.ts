@@ -178,7 +178,7 @@ export class BookingListPage implements OnInit {
 
       } else {
         console.log('400');
-
+        this.alreadyReq();
       }
 
     }).catch(error => {
@@ -282,6 +282,18 @@ export class BookingListPage implements OnInit {
 
     await alert.present();
   }
+
+
+  async alreadyReq() {
+    const alert = await this.alertCtrl.create({
+      
+      message: 'You have already requested!',
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  }
+
 
 
 }

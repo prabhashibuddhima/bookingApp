@@ -26,7 +26,7 @@ export class HomePage implements OnInit {
   reqBdRoom: any;
   noOfReqs: Number;
 
-  
+
 
 
   constructor(private storage: Storage, private plt: Platform, private localNotifications: LocalNotifications, private boardroomService: BoardroomService, private router: Router, private activatedRoute: ActivatedRoute, private alertController: AlertController, private authService: AuthenticationService) {
@@ -106,7 +106,6 @@ export class HomePage implements OnInit {
     });
 
     this.getAuth();
-  //  this.checkRequests();
 
   }
 
@@ -138,20 +137,68 @@ export class HomePage implements OnInit {
 
 
   }
-  
+
 
   checkRequests() {
     let data = {
       "email": this.userEmail
     }
-    this.boardroomService.checkReq(data).then(async res => {
-      let data = JSON.parse(res.data);
-      if (data.sno === 200) {
-        if (this.noOfReqs == null) {
-          this.noOfReqs = 0;
-          
+    // this.boardroomService.checkReq(data).then(async res => {
+    //   let data = JSON.parse(res.data);
+    //   if (data.sno === 200) {
+    //     console.log(this.noOfReqs);
+    //     if (this.noOfReqs == null) {
+    //       this.noOfReqs = 0;
 
-        } else {
+
+    //     } else {
+    //       console.log(this.noOfReqs);
+    //       if (data.rlength > this.noOfReqs) {
+    //         console.log('there r reqs');
+    //         this.pushNotification();
+    //         this.authService.requestsNumber(data.rlength);
+
+    //         this.storage.get('rlength').then((val) => {
+    //           this.noOfReqs = val;
+
+
+    //         });
+
+
+    //       } else if (data.rlength = this.noOfReqs) {
+    //         console.log('equal reqs' + data.rlength);
+
+
+    //       } else {
+    //         console.log(data.rlength);
+    //       }
+
+    //     }
+
+
+
+
+    //   } else if (data.sno === 404) {
+    //     console.log('no reqs');
+
+    //   } else {
+    //     console.log('server err1');
+
+    //   }
+
+    // }).catch(error => {
+    //   this.serverAlert();
+    // });
+
+
+    if (this.noOfReqs == null) {
+      this.noOfReqs = 0;
+    } else {
+      this.boardroomService.checkReq(data).then(async res => {
+        let data = JSON.parse(res.data);
+        if (data.sno === 200) {
+          console.log(this.noOfReqs);
+
           if (data.rlength > this.noOfReqs) {
             console.log('there r reqs');
             this.pushNotification();
@@ -172,85 +219,86 @@ export class HomePage implements OnInit {
             console.log(data.rlength);
           }
 
-        }
+        
 
 
 
 
       } else if (data.sno === 404) {
-
+        console.log('no reqs');
 
       } else {
         console.log('server err1');
 
       }
 
-    }).catch(error => {
+    }).catch (error => {
       this.serverAlert();
     });
 
   }
+}
 
-  
-  logout() {
-    this.authService.logoutAuthenticate();
+
+logout() {
+  this.authService.logoutAuthenticate();
+}
+
+
+brSelect(brNumber: number) {
+  if (brNumber == 1) {
+    this.boardRoom = 1;
+  } else if (brNumber == 2) {
+    this.boardRoom = 2;
+  } else {
+    this.boardRoom = 3;
   }
 
+}
 
-  brSelect(brNumber: number) {
-    if (brNumber == 1) {
-      this.boardRoom = 1;
-    } else if (brNumber == 2) {
-      this.boardRoom = 2;
-    } else {
-      this.boardRoom = 3;
+goToBooking() {
+
+  if (this.boardRoom == 1 || this.boardRoom == 2) {
+    let param = {
+      "boardRoom": this.boardRoom,
+      "email": this.userEmail,
+      "id": this.userID,
+      "username": this.userFullName
+
+
     }
-
+    this.router.navigate(['calendar-book'], { queryParams: param });
+    console.log(param);
   }
-
-  goToBooking() {
-
-    if (this.boardRoom == 1 || this.boardRoom == 2) {
-      let param = {
-        "boardRoom": this.boardRoom,
-        "email": this.userEmail,
-        "id": this.userID,
-        "username": this.userFullName
-
-
-      }
-      this.router.navigate(['calendar-book'], { queryParams: param });
-      console.log(param);
-    }
-    else {
-      this.noBoardRoomAlert();
-    }
-
-
+  else {
+    this.noBoardRoomAlert();
   }
 
 
-  async noBoardRoomAlert() {
-    const alert = await this.alertController.create({
-      header: 'No Selection!!',
-
-      message: 'Please Select A Board Room!!',
-      buttons: ['OK']
-    });
-
-    await alert.present();
-  }
+}
 
 
-  async serverAlert() {
-    const alert = await this.alertController.create({
-      header: 'Something went wrong!',
-      message: 'Please try again later',
-      buttons: ['OK']
-    });
+async noBoardRoomAlert() {
+  const alert = await this.alertController.create({
+    header: 'No Selection!!',
 
-    await alert.present();
-  }
+    message: 'Please Select A Board Room!!',
+    buttons: ['OK']
+  });
+
+  await alert.present();
+}
+
+
+async serverAlert() {
+  const alert = await this.alertController.create({
+    header: 'Something went wrong!',
+    message: 'Please try again later',
+    buttons: ['OK']
+  });
+
+  await alert.present();
+}
 
 
 }
