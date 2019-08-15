@@ -109,11 +109,11 @@ export class HomePage implements OnInit {
 
   }
 
-  ionViewWillEnter() {
-    this.ngOnInit();
+  // ionViewWillEnter() {
+  //   this.ngOnInit();
 
 
-  }
+  // }
 
   getAuth() {
     this.authService.getEmail().then((value) => {
@@ -219,86 +219,86 @@ export class HomePage implements OnInit {
             console.log(data.rlength);
           }
 
-        
 
 
 
 
-      } else if (data.sno === 404) {
-        console.log('no reqs');
 
-      } else {
-        console.log('server err1');
+        } else if (data.sno === 404) {
+          console.log('no reqs');
 
-      }
+        } else {
+          console.log('server err1');
 
-    }).catch (error => {
-      this.serverAlert();
-    });
+        }
 
-  }
-}
-
-
-logout() {
-  this.authService.logoutAuthenticate();
-}
-
-
-brSelect(brNumber: number) {
-  if (brNumber == 1) {
-    this.boardRoom = 1;
-  } else if (brNumber == 2) {
-    this.boardRoom = 2;
-  } else {
-    this.boardRoom = 3;
-  }
-
-}
-
-goToBooking() {
-
-  if (this.boardRoom == 1 || this.boardRoom == 2) {
-    let param = {
-      "boardRoom": this.boardRoom,
-      "email": this.userEmail,
-      "id": this.userID,
-      "username": this.userFullName
-
+      }).catch(error => {
+        this.serverAlert();
+      });
 
     }
-    this.router.navigate(['calendar-book'], { queryParams: param });
-    console.log(param);
-  }
-  else {
-    this.noBoardRoomAlert();
   }
 
 
-}
+  logout() {
+    this.authService.logoutAuthenticate();
+  }
 
 
-async noBoardRoomAlert() {
-  const alert = await this.alertController.create({
-    header: 'No Selection!!',
+  brSelect(brNumber: number) {
+    if (brNumber == 1) {
+      this.boardRoom = 1;
+    } else if (brNumber == 2) {
+      this.boardRoom = 2;
+    } else {
+      this.boardRoom = 3;
+    }
 
-    message: 'Please Select A Board Room!!',
-    buttons: ['OK']
-  });
+  }
 
-  await alert.present();
-}
+  goToBooking() {
+
+    if (this.boardRoom == 1 || this.boardRoom == 2) {
+      let param = {
+        "boardRoom": this.boardRoom,
+        "email": this.userEmail,
+        "id": this.userID,
+        "username": this.userFullName
 
 
-async serverAlert() {
-  const alert = await this.alertController.create({
-    header: 'Something went wrong!',
-    message: 'Please try again later',
-    buttons: ['OK']
-  });
+      }
+      this.router.navigate(['calendar-book'], { queryParams: param });
+      console.log(param);
+    }
+    else {
+      this.noBoardRoomAlert();
+    }
 
-  await alert.present();
-}
+
+  }
+
+
+  async noBoardRoomAlert() {
+    const alert = await this.alertController.create({
+      header: 'No Selection!!',
+
+      message: 'Please Select A Board Room!!',
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  }
+
+
+  async serverAlert() {
+    const alert = await this.alertController.create({
+      header: 'Something went wrong!',
+      message: 'Please try again later',
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  }
 
 
 }
