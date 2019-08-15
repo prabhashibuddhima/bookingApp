@@ -217,6 +217,7 @@ export class CalendarBookPage implements OnInit {
   // Selected date reange and hence title changed
   onViewTitleChanged(title) {
     this.viewTitle = title;
+    console.log(this.viewTitle);
   }
 
   // Calendar event was clicked

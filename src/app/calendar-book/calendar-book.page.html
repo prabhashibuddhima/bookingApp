@@ -64,11 +64,11 @@
 
     <ion-col size="6" text-right>
       <p align="center" style="font-size: 1.3em" *ngIf="calendar.mode == 'month' || calendar.mode == 'week'">
-        {{monthName}}
+        {{viewTitle}}
       </p>
-      <p align="center" style="font-size: 1.3em" *ngIf="calendar.mode == 'day'">
+      <!-- <p align="center" style="font-size: 1.3em" *ngIf="calendar.mode == 'day'">
         {{calendar.currentDate| date: 'dd/MM/yyyy' }}
-      </p>
+      </p> -->
     </ion-col>
 
 
