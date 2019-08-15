@@ -160,7 +160,7 @@ export class CalendarBookPage implements OnInit {
         if (data.sno === 200) {
           this.successMsg();
           this.myCal.loadEvents();
-          
+
 
         } else {
           this.notSavedMsg();
@@ -221,7 +221,7 @@ export class CalendarBookPage implements OnInit {
 
   // Calendar event was clicked
   async onEventSelected(event) {
-    // Use Angular date pipe for conversion
+    
     let start = formatDate(event.startTime, 'medium', this.locale);
     let end = formatDate(event.endTime, 'medium', this.locale);
 
@@ -235,7 +235,7 @@ export class CalendarBookPage implements OnInit {
       "bdno": this.bdno,
       "title": event.title,
       "bookBy": event.bookBy,
-      "description": event.desc,
+      "description": event.description,
       "startTime": start,
       "endTime": end,
       "trueUser": this.trueUser,
@@ -245,6 +245,8 @@ export class CalendarBookPage implements OnInit {
       "id": this.selectedBdRoom.id
 
     }
+
+    console.log(this.evparams);
 
     const alert = await this.alertCtrl.create({
       header: event.title + ' by ' + event.bookBy,
