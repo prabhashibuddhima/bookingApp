@@ -1,38 +1,51 @@
-
-<ion-content>
-  <ion-grid>
+<ion-content class="background">
+  <ion-grid style="margin-top: 15%">
     <ion-row>
       <ion-col>
-          <div style="width:100%">
-              <img src="assets/Ogilvy.png" align="center" style="width:100%;margin: auto" />
-              
-            </div>
-      
-      </ion-col>
-    </ion-row>
+        <div style="width:100%">
+          <img src="../../assets/logo4.png" align="center" style="margin: auto;display: block; height: auto; width: 50%" />
 
-    <ion-row style="margin-top: 15%">
-      <ion-col>
-        <div align="center" style="width:100%; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; font-size: 2em">
-          <b>Board Room <br> Booking</b>
         </div>
-      </ion-col>
-    </ion-row>
 
-    <ion-row style="margin-top: 25%">
-      <ion-col>
-        <ion-button style="width:100%" [routerLink]="['/register']">
-          Register
-        </ion-button>
-      </ion-col>
-      <ion-col>
-          <ion-button style="width:100%" [routerLink]="['/login']">
-              Login
-            </ion-button>
       </ion-col>
     </ion-row>
+    <div align="center" class="background-overlay" style="margin-top: 40%">
+      <ion-row style="margin-top: 15%">
+        <ion-col>
+          <div align="center" style="color:white;width:100%; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; font-size: 2em">
+            <b>Board Room <br>Reservation</b>
+          </div>
+        </ion-col>
+      </ion-row>
+
+      <ion-row style="margin-top: 25%">
+        <ion-col>
+          <ion-button color="btnclr" style="width:80%" [routerLink]="['/register']">
+            Register
+          </ion-button>
+        </ion-col>
+
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-button color="btnclr" style="width:80%" [routerLink]="['/login']">
+            Login
+          </ion-button>
+        </ion-col>
+      </ion-row>
+
+    </div>
+
 
   </ion-grid>
-   
+
 
 </ion-content>
+
+<ion-footer style="background: black">
+  <div align="center" style="color: whitesmoke">
+    Copyright © 2019 <b style="color: #ee1c25">Neo@Ogilvy</b>. All rights reserved.
+  </div>
+
+</ion-footer>
