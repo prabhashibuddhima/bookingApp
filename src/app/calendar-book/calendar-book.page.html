@@ -11,9 +11,10 @@
 
   <ion-card>
     <ion-card-header tappable (click)="collapseCard = !collapseCard">
-      <ion-card-title>Add a new Event</ion-card-title>
+      <ion-card-title>Book your time slot <ion-icon name="arrow-dropdown"></ion-icon></ion-card-title>
+      
     </ion-card-header>
-    <ion-card-content *ngIf="!collapseCard">
+    <ion-card-content *ngIf="collapseCard">
       <ion-item>
         <ion-label>Book By </ion-label>
         <ion-label type="text">{{uFullName}}</ion-label>
