@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup,FormControl } from '@angular/forms';
+import { FormGroup, FormControl } from '@angular/forms';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
-import { AlertController, NavController} from '@ionic/angular';
+import { AlertController, NavController } from '@ionic/angular';
 import { AuthenticationService } from '../service/authentication.service';
 
 
@@ -20,23 +20,23 @@ export class LoginPage implements OnInit {
   loggedId: any;
   userName: any;
   docsSubmit: any;
-  constructor(private authService: AuthenticationService,private router: Router, private formBuilder: FormBuilder, private alertController: AlertController, private navCtrl: NavController) { }
+  constructor(private authService: AuthenticationService, private router: Router, private formBuilder: FormBuilder, private alertController: AlertController, private navCtrl: NavController) { }
 
   ngOnInit() {
     this.docsSubmit = true;
     this.loginForm = this.formBuilder.group({
-    
+
       email: ['', Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')],
       password: ['', Validators.required],
-     
+
     });
-    
+
   }
 
-  
 
-  loginData(){
-    
+
+  loginData() {
+
     if (this.loginForm.invalid) {
       this.emptyFields();
 
@@ -47,7 +47,7 @@ export class LoginPage implements OnInit {
       console.log(this.email);
       console.log(this.password);
       let data = {
-      
+
         "email": this.email,
         "password": this.password
 
@@ -57,51 +57,57 @@ export class LoginPage implements OnInit {
         let data = JSON.parse(res.data);
         if (data.sno === 200) {
           console.log(data);
-          this.authService.loginAuthenticate(this.loginForm.value.email, data.isAuthentication, data.token, data.id, data.fullname);
-          this.successAlert();
-          
-          this.loggedEmail = this.loginForm.value.email;
-          this.loggedId = data.id;
-          this.userName = data.fullname;
-         
-          this.passData();
+          this.authService.loginAuthenticate(this.loginForm.value.email, data.isAuthentication, data.token, data.id, data.fullname, data.isApproved);
 
-         
-        } else if(data.sno === 404){
+          if (data.isApproved == 1) {
+            this.successAlert();
+
+            this.loggedEmail = this.loginForm.value.email;
+            this.loggedId = data.id;
+            this.userName = data.fullname;
+
+            this.passData();
+          } else {
+            this.noApproval();
+
+            
+
+          }
+        } else if (data.sno === 404) {
           this.noUserAlert();
-        }else {
+        } else {
           console.log(data);
           this.pwAlert();
         }
-        this.loginForm.reset();      
+        this.loginForm.reset();
       })
         .catch(err => {
           this.serverAlert();
-          this.loginForm.reset();  
+          this.loginForm.reset();
         });
 
     }
 
   }
 
-  passData(){
+  passData() {
     let param = {
       "email": this.loggedEmail,
       "id": this.loggedId,
       "username": this.userName
-      
+
     }
 
-   
+
 
     this.router.navigate(['home'], { queryParams: param });
-    
+
 
   }
 
   async emptyFields() {
     const alert = await this.alertController.create({
-     
+
       message: 'Please Enter all the fields',
       buttons: ['OK']
     });
@@ -111,7 +117,7 @@ export class LoginPage implements OnInit {
 
   async successAlert() {
     const alert = await this.alertController.create({
-     
+
       message: 'Successfully Logged!',
       buttons: ['OK']
     });
@@ -121,7 +127,7 @@ export class LoginPage implements OnInit {
 
   async pwAlert() {
     const alert = await this.alertController.create({
-     
+
       message: 'Incorrect Passsword!',
       buttons: ['OK']
     });
@@ -148,4 +154,22 @@ export class LoginPage implements OnInit {
 
     await alert.present();
   }
+
+  async noApproval() {
+    const alert = await this.alertController.create({
+      header: 'Not Approved! ',
+      message: 'You have no approve. Please try to log again later!',
+      buttons: [{
+        text: 'Ok',
+        handler: () => {
+          
+          this.router.navigate(['first-page']);
+        }
+      }]
+    });
+
+    await alert.present();
+  }
+
+  
 }

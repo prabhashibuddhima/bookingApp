@@ -36,12 +36,13 @@ export class AuthenticationService {
     return this.storage.get('id');
   }
 
-  loginAuthenticate(email, isAuthentication, token, id,fullname) {
+  loginAuthenticate(email, isAuthentication, token, id,fullname,isApproved) {
     this.storage.set("email", email);
     this.storage.set("isAuthentication", isAuthentication);
     this.storage.set("token", token);
     this.storage.set("id", id);
     this.storage.set("fullname", fullname);
+    this.storage.set("isApproved", isApproved)
   }
 
   requestsNumber(rlength){
@@ -54,8 +55,10 @@ export class AuthenticationService {
     this.storage.set("isAuthentication", false);
     this.storage.set("token", "");
     this.storage.set("id", "");
-
+    this.storage.set("fullname", "");
+    this.storage.set("isApproved", 0);
     this.router.navigate(['/first-page']);
+    
   }
 
   loginPassData(data) {

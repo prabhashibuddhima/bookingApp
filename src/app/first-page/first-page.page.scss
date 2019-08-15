@@ -4,9 +4,10 @@ ion-content.background{
 
 .background-overlay {
     position: absolute;
-    width: 100%;
+    width: 97%;
     height: 60%;
     top: 0;
+    //align: center;
     // background: linear-gradient(to right, rgba(68, 253, 159, 0.65), rgba(72, 127, 238, 0.65));
     background-color: #00000070;
 }

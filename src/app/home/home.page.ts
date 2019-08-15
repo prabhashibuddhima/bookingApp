@@ -25,7 +25,8 @@ export class HomePage implements OnInit {
   reqETime: any;
   reqBdRoom: any;
   noOfReqs: Number;
-
+  isApproved: any;
+  subscription;
 
 
 
@@ -48,9 +49,22 @@ export class HomePage implements OnInit {
 
     });
 
+    // if(this.isApproved==1){
     let callReq = setInterval(() => {
       this.checkRequests();
     }, 10000);
+    // }
+
+  }
+
+  ionViewDidEnter() {
+    this.subscription = this.plt.backButton.subscribe(() => {
+      navigator['app'].exitApp();
+    });
+  }
+
+  ionViewWillLeave() {
+    this.subscription.unsubscribe();
   }
 
 
@@ -104,6 +118,8 @@ export class HomePage implements OnInit {
 
       this.userFullName = val;
     });
+
+
 
     this.getAuth();
 
