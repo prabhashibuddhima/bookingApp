@@ -49,6 +49,11 @@ export class CalendarBookPage implements OnInit {
 
   };
 
+  markDisabled =(date: Date) =>{
+    var current = new Date(new Date().setDate(new Date().getDate() - 1));;
+    return date < current;
+  }
+
   @ViewChild(CalendarComponent, { static: true }) myCal: CalendarComponent;
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private alertCtrl: AlertController, @Inject(LOCALE_ID) private locale: string, private boardroomService: BoardroomService) { }

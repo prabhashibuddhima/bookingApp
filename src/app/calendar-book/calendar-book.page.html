@@ -11,8 +11,9 @@
 
   <ion-card>
     <ion-card-header tappable (click)="collapseCard = !collapseCard">
-      <ion-card-title>Book your time slot <ion-icon name="arrow-dropdown"></ion-icon></ion-card-title>
-      
+      <ion-card-title>Book your time slot <ion-icon name="arrow-dropdown"></ion-icon>
+      </ion-card-title>
+
     </ion-card-header>
     <ion-card-content *ngIf="collapseCard">
       <ion-item>
@@ -82,7 +83,7 @@
 
   <calendar [eventSource]="eventSource" [calendarMode]="calendar.mode" [currentDate]="calendar.currentDate"
     (onEventSelected)="onEventSelected($event)" (onTitleChanged)="onViewTitleChanged($event)" (onTimeSelected)="onTimeSelected($event)"
-    startHour="0" endHour="25" step="30" startingDayWeek="1">
+    startHour="0" endHour="25" step="30" startingDayWeek="1" [markDisabled]="markDisabled">
   </calendar>
 
 </ion-content>

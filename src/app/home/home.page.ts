@@ -27,7 +27,8 @@ export class HomePage implements OnInit {
   noOfReqs: Number;
   isApproved: any;
   subscription;
-
+  buttonColor1: any = '#00000070';
+  buttonColor2: any = '#00000070';
 
 
   constructor(private storage: Storage, private plt: Platform, private localNotifications: LocalNotifications, private boardroomService: BoardroomService, private router: Router, private activatedRoute: ActivatedRoute, private alertController: AlertController, private authService: AuthenticationService) {
@@ -249,7 +250,8 @@ export class HomePage implements OnInit {
         }
 
       }).catch(error => {
-        this.serverAlert();
+        console.log('server err2');
+       // this.serverAlert();
       });
 
     }
@@ -260,13 +262,22 @@ export class HomePage implements OnInit {
     this.authService.logoutAuthenticate();
   }
 
+    
+  
+
 
   brSelect(brNumber: number) {
     if (brNumber == 1) {
       this.boardRoom = 1;
+      this.buttonColor1='rgba(0, 0, 0, 0.4)';
+      this.buttonColor2='#00000070';
     } else if (brNumber == 2) {
+      this.buttonColor2='rgba(0, 0, 0, 0.4)';
+      this.buttonColor1='#00000070';
       this.boardRoom = 2;
     } else {
+      this.buttonColor2='#00000070';
+      this.buttonColor1='#00000070';
       this.boardRoom = 3;
     }
 

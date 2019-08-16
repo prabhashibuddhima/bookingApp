@@ -1,61 +1,69 @@
-
 <ion-content class="content-back">
   <ion-grid style="margin-top: 10%">
-      <ion-row>
-          <ion-col align="left">
-            <ion-label>
-              <ion-icon name="notifications" (click)="goNotifications()" style="height: 25px; width: 50px"></ion-icon>
-            </ion-label>
-          </ion-col>
-          <ion-col align="right">
-            <ion-label>
-              <ion-icon name="log-out" (click)="logout()" style="height: 25px; width: 50px"></ion-icon>
-             </ion-label>
-    
-          </ion-col>
-        </ion-row>
-    
+    <ion-row>
+      <ion-col align="left">
+        <ion-label>
+          <ion-icon name="notifications" (click)="goNotifications()" style="height: 25px; width: 50px"></ion-icon>
+        </ion-label>
+      </ion-col>
+      <ion-col align="right">
+        <ion-label>
+          <ion-icon name="log-out" (click)="logout()" style="height: 25px; width: 50px"></ion-icon>
+        </ion-label>
+
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col align="center">
+        <img src="../../assets/logo4.png" align="center" style="margin: auto;display: block; height: auto; width: 50%" />
+      </ion-col>
+    </ion-row>
     <ion-row>
       <ion-col align="center" style="font-size: 2em;font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif ">
         <ion-label>
-         Hey 
+          Hey
         </ion-label>
-        
+
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col align="center" style="font-size: 2em;font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif ">
-          <ion-label>
-              <b>{{ userFullName }} </b>  
-               </ion-label>
+        <ion-label>
+          <b>{{ userFullName }} </b>
+        </ion-label>
       </ion-col>
     </ion-row>
-
+  </ion-grid>
+  <ion-grid style="background: #E9C2C2;height: 50%; margin-top: 8%">
     <ion-row>
-      <ion-col>
-          <input type="radio" name="checkbox" id="checkbox1" value="bdroom1">
-          <label align="center" class="tbox" for="checkbox1" style="width:100%;color:  whitesmoke" (click)="brSelect(1)">
-            Board Room 1 <br>
-            (Media)
-    
-    
-          </label>
+      <ion-col align="left">
+        <input type="radio" name="checkbox" id="checkbox1" value="bdroom1">
+        <label align="center" for="checkbox1" style="width:100%;color:  whitesmoke" (click)="brSelect(1)">
+          <ion-card style="margin-left:-1%">
+            <img src="../../assets/bdr5.jpg" style="height: 100%;" />
+
+            <div class="card-overlay" [ngStyle]="{'background-color': buttonColor1}">
+              <div class="card-title" align="center"> 81 BoardRoom</div>
+            </div>
+          </ion-card>
+        </label>
       </ion-col>
-    </ion-row>
 
-    <ion-row>
       <ion-col>
         <input type="radio" name="checkbox" id="checkbox2" value="bdroom2">
-        <label align="center" class="tbox" for="checkbox2" style="width:100%;color:  whitesmoke" (click)="brSelect(2)">
-          Board Room 2 <br>
-          (Neo)
-  
-  
+        <label align="center" for="checkbox2" style="width:100%;color:  whitesmoke" (click)="brSelect(2)">
+          <ion-card style="margin-left:-1%">
+            <img src="../../assets/bdr6.jpg" style="height: 100%;" />
+
+            <div class="card-overlay" [ngStyle]="{'background-color': buttonColor2}">
+              <div class="card-title" align="center"> 85/7 BoardRoom</div>
+            </div>
+          </ion-card>
         </label>
       </ion-col>
     </ion-row>
 
-    <ion-row>
+    <ion-row style="margin-top: 15%">
       <ion-col align="center">
         <ion-label (click)="goToBooking()" class="btnmargin">
           Book Now
