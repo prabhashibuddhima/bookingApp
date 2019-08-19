@@ -1,6 +1,8 @@
 ion-content.background{
-    --background: url(../../assets/bdr3.jpg) no-repeat 52% center/cover;
+    // --background: url(../../assets/bdr3.jpg) no-repeat 52% center/cover;
+    --background: #EC3F43;
 }
+
 
 .background-overlay {
     position: absolute;
@@ -12,8 +14,8 @@ ion-content.background{
     background-color: #00000070;
 }
 
-ion-button{
-    background: #A12727;
+// ion-button{
+//     background: #DA332D;
     
-}
+// }
 
