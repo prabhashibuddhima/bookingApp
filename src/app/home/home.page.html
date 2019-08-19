@@ -1,5 +1,5 @@
 <ion-content class="content-back">
-  <ion-grid style="margin-top: 10%">
+  <ion-grid>
     <ion-row>
       <ion-col align="left">
         <ion-label>
@@ -13,11 +13,11 @@
 
       </ion-col>
     </ion-row>
-    <ion-row>
+    <!-- <ion-row>
       <ion-col align="center">
         <img src="../../assets/logo4.png" align="center" style="margin: auto;display: block; height: auto; width: 50%" />
       </ion-col>
-    </ion-row>
+    </ion-row> -->
     <ion-row>
       <ion-col align="center" style="font-size: 2em;font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif ">
         <ion-label>
@@ -33,43 +33,60 @@
         </ion-label>
       </ion-col>
     </ion-row>
-  </ion-grid>
-  <ion-grid style="background: #E9C2C2;height: 50%; margin-top: 8%">
+
     <ion-row>
-      <ion-col align="left">
-        <input type="radio" name="checkbox" id="checkbox1" value="bdroom1">
-        <label align="center" for="checkbox1" style="width:100%;color:  whitesmoke" (click)="brSelect(1)">
-          <ion-card style="margin-left:-1%">
-            <img src="../../assets/bdr5.jpg" style="height: 100%;" />
-
-            <div class="card-overlay" [ngStyle]="{'background-color': buttonColor1}">
-              <div class="card-title" align="center"> 81 BoardRoom</div>
-            </div>
-          </ion-card>
-        </label>
-      </ion-col>
-
-      <ion-col>
-        <input type="radio" name="checkbox" id="checkbox2" value="bdroom2">
-        <label align="center" for="checkbox2" style="width:100%;color:  whitesmoke" (click)="brSelect(2)">
-          <ion-card style="margin-left:-1%">
-            <img src="../../assets/bdr6.jpg" style="height: 100%;" />
-
-            <div class="card-overlay" [ngStyle]="{'background-color': buttonColor2}">
-              <div class="card-title" align="center"> 85/7 BoardRoom</div>
-            </div>
-          </ion-card>
-        </label>
+      <ion-col>.
+        <div align="center" style="color:white;width:100%; font-family: inherit; font-size: 1.5em">
+          Select the Boardroom
+        </div>
       </ion-col>
     </ion-row>
 
-    <ion-row style="margin-top: 15%">
+    <ion-row>
       <ion-col align="center">
-        <ion-label (click)="goToBooking()" class="btnmargin">
-          Book Now
-        </ion-label>
+        <input type="radio" name="checkbox" id="checkbox1" value="bdroom1">
+        <label class="tbox" for="checkbox1"  (click)="goToBooking(1)">
+          <!-- <ion-card style="margin-left:-1%"> -->
+            <ion-avatar>
+                <img src="../../assets/bdrf.jpeg" style="height: 100%;" />
+            </ion-avatar>
+           
+          
+            
+            <div class="card-overlay" [ngStyle]="{'background-color': buttonColor1}">
+              <div class="card-title" align="center" style="margin-left: 16%"> No: 81</div>
+            </div>
+          <!-- </ion-card> -->
+        </label>
       </ion-col>
     </ion-row>
+    <ion-row style="margin-top: -7%">
+      <ion-col align="center">
+        <input type="radio" name="checkbox" id="checkbox2" value="bdroom2">
+        <label class="tbox" for="checkbox2"  (click)="goToBooking(2)">
+          <!-- <ion-card style="margin-left:-1%"> -->
+
+            <ion-avatar>
+                <img src="../../assets/bdrf.jpeg" style="height: 100%;" />
+            </ion-avatar>
+            
+          
+            
+            <div class="card-overlay" [ngStyle]="{'background-color': buttonColor2}">
+              <div class="card-title" align="center" style="margin-left: 16%"> No: 85</div>
+            </div>
+          <!-- </ion-card> -->
+        </label>
+      </ion-col>
+    </ion-row>
+
+    <!-- <ion-row style="margin-top: 15%">
+      <ion-col align="center">
+        <ion-button color="medium" >
+          Book Now
+        </ion-button>
+      </ion-col>
+    </ion-row> -->
 
   </ion-grid>
 </ion-content>

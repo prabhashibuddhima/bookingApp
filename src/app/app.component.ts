@@ -7,7 +7,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { BoardroomService } from './service/boardroom.service';
 import { LocalNotifications, ELocalNotificationTriggerUnit, ILocalNotificationActionType, ILocalNotification } from '@ionic-native/local-notifications/ngx';
 import { Storage } from '@ionic/storage';
-
+import { timer } from 'rxjs/observable/timer';
 
 // import { StatusBar } from '@ionic-native/status-bar/ngx';
 
@@ -20,6 +20,7 @@ import { Storage } from '@ionic/storage';
 export class AppComponent {
   userEmail: any;
   noOfReqs: any;
+  showSplash = true;
 
   constructor(
     private platform: Platform,
@@ -43,7 +44,7 @@ export class AppComponent {
     this.platform.ready().then(() => {
       // this.statusBar.styleDefault();
       this.splashScreen.hide();
-
+      timer(3000).subscribe(() => this.showSplash = false);
       // this.localNotifications.on('click').subscribe(res => {
       //   let msg = res.data ? res.data.mydata : '';
       //   this.goNotifications();

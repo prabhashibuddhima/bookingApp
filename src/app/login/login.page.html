@@ -3,12 +3,12 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/first-page" style="color:white"></ion-back-button>
     </ion-buttons>
-    <ion-title align="center">Login</ion-title>
+    <!-- <ion-title align="center">Login</ion-title> -->
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <form [formGroup]="loginForm" (ngSubmit)="loginData()">
+<ion-content class="content-back">
+  <form [formGroup]="loginForm" (ngSubmit)="loginData()" class="content-back">
     <ion-grid>
       <ion-row>
         <ion-col>
@@ -19,29 +19,36 @@
         </ion-col>
       </ion-row>
       <ion-row>
-        <ion-col>
-          <ion-item>
-            <ion-label position="floating">Email</ion-label>
+        <ion-col>.
+            <div align="center" style="margin-top: -10%;color:white;width:100%; font-family: inherit; font-size: 1.7em">
+           Login
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row style="margin-top: 5%">
+        <ion-col align="center">
+          <ion-item align="center" style="width: 90%">
+            <ion-label position="floating"  style="color: white">Email</ion-label>
             <ion-input id="email" type="email" formControlName="email" [(ngModel)]="email" name="email" required></ion-input>
           </ion-item>
 
           <ion-item *ngIf="loginForm != null && !loginForm.get('email').valid && loginForm.get('email').touched && loginForm.get('email').value"
             lines="none">
-            <ion-label color="danger">Please Enter A Valid Email
+            <ion-label color="light">Please Enter A Valid Email
             </ion-label>
           </ion-item>
         </ion-col>
       </ion-row>
       <ion-row>
-          <ion-col>
+          <ion-col align="center">
   
-            <ion-item style="width: 95%">
-              <ion-label position="floating">Password</ion-label>
+            <ion-item style="width: 90%">
+              <ion-label position="floating" style="color: white">Password</ion-label>
               <ion-input id="password" type="password" formControlName="password" [(ngModel)]="password" name="password" required></ion-input>
             </ion-item>
             <ion-item *ngIf="loginForm != null && loginForm.get('password').valid && loginForm.get('password').touched && !loginForm.get('password').valid"
               lines="none">
-              <ion-label>
+              <ion-label color="light">
                 Please Enter Your Password
               </ion-label>
             </ion-item>
@@ -50,7 +57,7 @@
         </ion-row>
         <ion-row style="margin-top:8%">
             <ion-col align="center">
-              <ion-button style="width: 95%" type="submit" [disabled]="email == null || password == null || !loginForm.get('email').valid">
+              <ion-button color="medium" style="width: 90%; height: 50px" type="submit" [disabled]="email == null || password == null || !loginForm.get('email').valid">
                 Login
               </ion-button>
             </ion-col>

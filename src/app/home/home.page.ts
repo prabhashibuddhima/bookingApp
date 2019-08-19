@@ -269,10 +269,10 @@ export class HomePage implements OnInit {
   brSelect(brNumber: number) {
     if (brNumber == 1) {
       this.boardRoom = 1;
-      this.buttonColor1='rgba(0, 0, 0, 0.4)';
+      this.buttonColor1='rgba(0, 0, 0, 0.2)';
       this.buttonColor2='#00000070';
     } else if (brNumber == 2) {
-      this.buttonColor2='rgba(0, 0, 0, 0.4)';
+      this.buttonColor2='rgba(0, 0, 0, 0.2)';
       this.buttonColor1='#00000070';
       this.boardRoom = 2;
     } else {
@@ -283,7 +283,8 @@ export class HomePage implements OnInit {
 
   }
 
-  goToBooking() {
+  goToBooking(brNumber: number) {
+    this.brSelect(brNumber);
 
     if (this.boardRoom == 1 || this.boardRoom == 2) {
       let param = {

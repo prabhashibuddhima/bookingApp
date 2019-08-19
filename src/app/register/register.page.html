@@ -18,7 +18,7 @@
           </div>
         </ion-col>
       </ion-row>
-      <ion-row>
+      <!-- <ion-row>
         <ion-col>
           <ion-label>Profile Photo</ion-label>
           <ion-item class="tbox" style="margin-top: 5%">
@@ -30,7 +30,7 @@
             <ion-button (click)="getCamera('profile')">Camera</ion-button>
           </ion-item>
         </ion-col>
-      </ion-row>
+      </ion-row> -->
       <ion-row>
         <ion-col>
 
@@ -109,7 +109,7 @@
       </ion-row>
       <ion-row style="margin-top:8%">
         <ion-col align="center">
-          <ion-button style="width: 95%" type="submit" [disabled]="firstName == null || lastName == null || email == null || password == null || repassword == null || !regForm.get('email').valid">
+          <ion-button style="width: 90%; height: 50px" type="submit" [disabled]="firstName == null || lastName == null || email == null || password == null || repassword == null || !regForm.get('email').valid">
             Register
           </ion-button>
         </ion-col>
