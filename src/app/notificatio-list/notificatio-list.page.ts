@@ -41,8 +41,9 @@ export class NotificatioListPage implements OnInit {
   
      this.boardroomService.checkReq(data).then(async res => {
         let data = JSON.parse(res.data);
-    
-        data.events.forEach(element => {
+        let eventarray = data.events;
+        eventarray.reverse();
+        eventarray.forEach(element => {
           this.eventSource.push(element);
         });
 
@@ -53,6 +54,8 @@ export class NotificatioListPage implements OnInit {
     });
    
   }
+
+  
 
  
  

@@ -1,9 +1,9 @@
 import { BoardroomService } from './../service/boardroom.service';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup,FormControl } from '@angular/forms';
+import { FormGroup, FormControl } from '@angular/forms';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AlertController, NavController} from '@ionic/angular';
+import { AlertController, NavController } from '@ionic/angular';
 import { File } from '@ionic-native/file/ngx';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 
@@ -25,25 +25,25 @@ export class RegisterPage implements OnInit {
   password: any;
   repassword: any;
 
-  constructor(private boardroomService: BoardroomService,private router: Router, private camera: Camera, private file: File, private formBuilder: FormBuilder, private alertController: AlertController, private navCtrl: NavController) { }
+  constructor(private boardroomService: BoardroomService, private router: Router, private camera: Camera, private file: File, private formBuilder: FormBuilder, private alertController: AlertController, private navCtrl: NavController) { }
 
   ngOnInit() {
 
-   //this.regSubmit = true;
+    //this.regSubmit = true;
 
-  //  this.registerForm = new FormGroup({
-  //   firstName: new FormControl(), 
-  //   lastName: new FormControl(), 
-  //   email: new FormControl(),
-  //   password: new FormControl(),
-  //   repassword: new FormControl() 
-  // });
-  
+    //  this.registerForm = new FormGroup({
+    //   firstName: new FormControl(), 
+    //   lastName: new FormControl(), 
+    //   email: new FormControl(),
+    //   password: new FormControl(),
+    //   repassword: new FormControl() 
+    // });
+
 
     this.regForm = this.formBuilder.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      email: ['', Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')],
+      email: ['', Validators.pattern('^[a-zA-Z0-9_.+-]+@ogilvy.com')],
       password: [''],
       repassword: ['']
     });
@@ -56,13 +56,13 @@ export class RegisterPage implements OnInit {
     // } else 
 
     // if () {
-     
+
     //   this.emptyFields();
 
     // } else 
-    if(this.password != this.repassword) {
+    if (this.password != this.repassword) {
       this.passwordAlert();
-    }else{
+    } else {
       //this.regSubmit = false;
       let data = {
         "firstName": this.firstName,
@@ -75,18 +75,18 @@ export class RegisterPage implements OnInit {
       this.boardroomService.register(data).then(async res => {
         let data = JSON.parse(res.data);
         if (data.sno === 200) {
-         
+
           console.log('gotcha');
           // await this.boardroomService.upload(r.id, 'profileImage', this.profileImageURI);
 
-        
+
 
           this.successAlert();
           this.navCtrl.navigateRoot('/login');
 
-        } else if(data.sno === 500){
+        } else if (data.sno === 500) {
           this.emailExists();
-        }else{
+        } else {
           console.log('server err');
           this.serverAlert();
         }
@@ -96,8 +96,8 @@ export class RegisterPage implements OnInit {
         this.regForm.reset();
         this.serverAlert();
       });
-    
-  
+
+
 
     }
 
@@ -167,7 +167,7 @@ export class RegisterPage implements OnInit {
 
   async successAlert() {
     const alert = await this.alertController.create({
-     
+
       message: 'You have registered Successfully!',
       buttons: ['OK']
     });
@@ -177,7 +177,7 @@ export class RegisterPage implements OnInit {
 
   async emptyFields() {
     const alert = await this.alertController.create({
-     
+
       message: 'Please Enter all the fields',
       buttons: ['OK']
     });
@@ -187,7 +187,7 @@ export class RegisterPage implements OnInit {
 
   async emailExists() {
     const alert = await this.alertController.create({
-     
+
       message: 'Your email is already exists!',
       buttons: ['OK']
     });
