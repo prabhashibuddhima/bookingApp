@@ -48,10 +48,13 @@ export class HomePage implements OnInit {
       });
 
 
+
+
     });
 
     // if(this.isApproved==1){
     let callReq = setInterval(() => {
+     
       this.checkRequests();
     }, 10000);
     // }
@@ -102,7 +105,7 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
 
-    console.log(this.noOfReqs);
+    
 
     this.storage.get('email').then((val) => {
 
@@ -120,7 +123,8 @@ export class HomePage implements OnInit {
       this.userFullName = val;
     });
 
-
+  
+    console.log(this.noOfReqs);
 
     this.getAuth();
 
@@ -160,52 +164,6 @@ export class HomePage implements OnInit {
     let data = {
       "email": this.userEmail
     }
-    // this.boardroomService.checkReq(data).then(async res => {
-    //   let data = JSON.parse(res.data);
-    //   if (data.sno === 200) {
-    //     console.log(this.noOfReqs);
-    //     if (this.noOfReqs == null) {
-    //       this.noOfReqs = 0;
-
-
-    //     } else {
-    //       console.log(this.noOfReqs);
-    //       if (data.rlength > this.noOfReqs) {
-    //         console.log('there r reqs');
-    //         this.pushNotification();
-    //         this.authService.requestsNumber(data.rlength);
-
-    //         this.storage.get('rlength').then((val) => {
-    //           this.noOfReqs = val;
-
-
-    //         });
-
-
-    //       } else if (data.rlength = this.noOfReqs) {
-    //         console.log('equal reqs' + data.rlength);
-
-
-    //       } else {
-    //         console.log(data.rlength);
-    //       }
-
-    //     }
-
-
-
-
-    //   } else if (data.sno === 404) {
-    //     console.log('no reqs');
-
-    //   } else {
-    //     console.log('server err1');
-
-    //   }
-
-    // }).catch(error => {
-    //   this.serverAlert();
-    // });
 
 
     if (this.noOfReqs == null) {
@@ -251,7 +209,7 @@ export class HomePage implements OnInit {
 
       }).catch(error => {
         console.log('server err2');
-       // this.serverAlert();
+        // this.serverAlert();
       });
 
     }
@@ -262,23 +220,23 @@ export class HomePage implements OnInit {
     this.authService.logoutAuthenticate();
   }
 
-    
-  
+
+
 
 
   brSelect(brNumber: number) {
     if (brNumber == 1) {
-      this.boardRoom = 1;
-      this.buttonColor1='rgba(0, 0, 0, 0.2)';
-      this.buttonColor2='#00000070';
+      this.boardRoom = 81;
+      this.buttonColor1 = 'rgba(0, 0, 0, 0.2)';
+      this.buttonColor2 = '#00000070';
     } else if (brNumber == 2) {
-      this.buttonColor2='rgba(0, 0, 0, 0.2)';
-      this.buttonColor1='#00000070';
-      this.boardRoom = 2;
+      this.buttonColor2 = 'rgba(0, 0, 0, 0.2)';
+      this.buttonColor1 = '#00000070';
+      this.boardRoom = 85;
     } else {
-      this.buttonColor2='#00000070';
-      this.buttonColor1='#00000070';
-      this.boardRoom = 3;
+      this.buttonColor2 = '#00000070';
+      this.buttonColor1 = '#00000070';
+      this.boardRoom = 0;
     }
 
   }
@@ -286,7 +244,7 @@ export class HomePage implements OnInit {
   goToBooking(brNumber: number) {
     this.brSelect(brNumber);
 
-    if (this.boardRoom == 1 || this.boardRoom == 2) {
+    if (this.boardRoom == 81 || this.boardRoom == 85) {
       let param = {
         "boardRoom": this.boardRoom,
         "email": this.userEmail,

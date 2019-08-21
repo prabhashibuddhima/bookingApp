@@ -40,7 +40,7 @@ export class BookingListPage implements OnInit {
       this.selectedData = evparams;
     });
     //this.btnDisabled = true;
-    console.log(this.selectedData);
+    //console.log(this.selectedData);
     this.selectedBdNo = this.selectedData.bdno;
     this.selectedTitle = this.selectedData.title;
     this.selectedPerson = this.selectedData.bookBy;
@@ -49,8 +49,8 @@ export class BookingListPage implements OnInit {
     this.selectedEndTime = this.selectedData.endTime;
     this.reqUser = this.selectedData.trueUser;
 
-    console.log(this.reqUser);
-    console.log(this.selectedStartTime);
+    //console.log(this.reqUser);
+    //console.log(this.selectedStartTime);
 
   }
 

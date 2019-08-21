@@ -82,7 +82,8 @@ ion-card{
   width: 61%;
   font-weight: bold;
   color: white;
-  padding-top: 12%;
+  padding-top: 10%;
+  padding-bottom: 10%;
   //background: hsla(186, 52%, 0%, 0.7);
   height: 100%;
  
@@ -90,12 +91,14 @@ ion-card{
 }
 
 .card-overlay {
+  width: 130px;
+  //height: 300px;
   position: absolute;
-  width: 125px;
-  height: 40px;
-  top: 135px;
-  margin-left: 8%;
-  border-radius: 20px;
+  left: 50%;
+  top: 116%; 
+  margin-left: -68px;
+  margin-top: -147px;
+  border-radius: 60px;
   // background: linear-gradient(to right, rgba(68, 253, 159, 0.65), rgba(72, 127, 238, 0.65));
   //background-color: #00000070;
   

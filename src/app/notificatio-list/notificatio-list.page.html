@@ -1,15 +1,15 @@
 <ion-header>
-    <ion-toolbar color="primary">
-      <ion-buttons slot="start">
-        <ion-back-button defaultHref="/home" style="color:white"></ion-back-button>
-      </ion-buttons>
-      <ion-title align="center">Requests</ion-title>
-    </ion-toolbar>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home" style="color:white"></ion-back-button>
+    </ion-buttons>
+    <ion-title align="center">Requests</ion-title>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-grid>
-    <ion-row>
+    <!-- <ion-row>
       <ion-col>
           <ion-list>
               <ion-item>
@@ -28,8 +28,8 @@
               </ion-item>
             </ion-list>
       </ion-col>
-    </ion-row>
-    <ion-row>
+    </ion-row> -->
+    <!-- <ion-row>
       <ion-col>
           <ion-list>
               <ion-item *ngFor="let n of eventSource">
@@ -48,8 +48,34 @@
               </ion-item>
             </ion-list> 
       </ion-col>
+    </ion-row> -->
+
+
+    <ion-row>
+      <ion-col align="center">
+        <ion-item *ngFor="let n of eventSource" style="margin-bottom: 5%">
+          <ion-label style="float:left">
+            # {{n.bdno}}
+          </ion-label>
+          <ion-label style="float:left; margin-left: -60%">
+            <ion-label>
+              <b>from :</b> {{n.startTime}}
+            </ion-label>
+            <br>
+            <ion-label><b>to : </b> {{n.endTime}}</ion-label>
+            <br>
+            <ion-label>
+              <b>by :</b> {{n.sender}}
+            </ion-label>
+          </ion-label>
+
+        </ion-item>
+        
+
+      </ion-col>
+
     </ion-row>
   </ion-grid>
-  
+
 
 </ion-content>

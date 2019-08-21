@@ -66,12 +66,12 @@ export class CalendarBookPage implements OnInit {
 
     console.log(this.selectedBdRoom);
 
-    if (this.selectedBdRoom.boardRoom == "1") {
+    if (this.selectedBdRoom.boardRoom == "81") {
       this.bdName = "Board Room 1";
-      this.bdno = 1;
+      this.bdno = 81;
     } else {
       this.bdName = "Board Room 2";
-      this.bdno = 2;
+      this.bdno = 85;
     }
 
 
