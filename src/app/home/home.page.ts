@@ -29,7 +29,7 @@ export class HomePage implements OnInit {
   subscription;
   buttonColor1: any = '#00000070';
   buttonColor2: any = '#00000070';
-
+ 
 
   constructor(private storage: Storage, private plt: Platform, private localNotifications: LocalNotifications, private boardroomService: BoardroomService, private router: Router, private activatedRoute: ActivatedRoute, private alertController: AlertController, private authService: AuthenticationService) {
 
@@ -38,7 +38,7 @@ export class HomePage implements OnInit {
       this.localNotifications.on('click').subscribe(res => {
         let msg = res.data ? res.data.mydata : '';
         this.goNotifications();
-        //this.showAlert(res.title, res.text, msg);
+        
       });
 
       this.localNotifications.on('trigger').subscribe(res => {
@@ -54,7 +54,7 @@ export class HomePage implements OnInit {
 
     // if(this.isApproved==1){
     let callReq = setInterval(() => {
-     
+
       this.checkRequests();
     }, 10000);
     // }
@@ -75,7 +75,9 @@ export class HomePage implements OnInit {
   goNotifications() {
 
     let userparam = {
-      "email": this.userEmail
+      "email": this.userEmail,
+      
+
     }
 
     console.log(userparam);
@@ -104,9 +106,6 @@ export class HomePage implements OnInit {
   }
 
   ngOnInit() {
-
-    
-
     this.storage.get('email').then((val) => {
 
       this.userEmail = val;
@@ -123,7 +122,7 @@ export class HomePage implements OnInit {
       this.userFullName = val;
     });
 
-  
+
     console.log(this.noOfReqs);
 
     this.getAuth();
@@ -171,11 +170,13 @@ export class HomePage implements OnInit {
     } else {
       this.boardroomService.checkReq(data).then(async res => {
         let data = JSON.parse(res.data);
+        
         if (data.sno === 200) {
           console.log(this.noOfReqs);
 
           if (data.rlength > this.noOfReqs) {
             console.log('there r reqs');
+            //console.log(this.reqarray);
             this.pushNotification();
             this.authService.requestsNumber(data.rlength);
 
