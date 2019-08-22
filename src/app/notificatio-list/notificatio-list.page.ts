@@ -13,7 +13,7 @@ import { Storage } from '@ionic/storage';
 export class NotificatioListPage implements OnInit {
   reqs: any = {};
   email: any;
-  
+
   reqread: any;
   eventSource = [];
   reqarray = [];
@@ -33,13 +33,13 @@ export class NotificatioListPage implements OnInit {
     this.activatedRoute.queryParams.subscribe(uparams => {
       this.reqs = uparams;
       this.email = this.reqs.email;
-   
+
 
       let data = {
         "email": this.email
       }
 
-    
+
       console.error();
 
       this.boardroomService.checkReq(data).then(async res => {
@@ -50,7 +50,7 @@ export class NotificatioListPage implements OnInit {
           this.eventSource.push(element);
           this.reqarray.push(element.reqid);
         });
-       // console.log(this.reqarray);
+        console.log(this.reqarray);
         this.updateReqs();
       }).catch(error => {
         console.log('server err');
@@ -66,28 +66,23 @@ export class NotificatioListPage implements OnInit {
 
     this.reqread = 1;
     let data = {
-      "reqid": this.reqarray,
-      "readreq": this.reqread
+      reqid: this.reqarray,
+      readreq: this.reqread
     }
+  console.log(data);
+    this.boardroomService.readRequest(data);
+    // let data = JSON.parse(res.data);
+    // if (data.sno === 200) {
 
-    this.boardroomService.readRequest(data).then(async res => {
-      let data = JSON.parse(res.data);
-      if (data.sno === 200) {
-
-        console.log('read');
+    //   console.log('read');
 
 
-      } else {
+    // } else {
 
-        console.log('Cannot read');
-      }
+    //   console.log('Cannot read');
+    // }
 
-    }).catch(error => {
-      //alert(JSON.stringify(error));
-      console.log('server err');
-      // this.serverAlert();
 
-    });
 
 
 
