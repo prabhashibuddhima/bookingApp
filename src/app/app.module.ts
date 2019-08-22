@@ -14,6 +14,9 @@ import { File } from '@ionic-native/file/ngx';
 import { FilePath } from '@ionic-native/file-path/ngx';
 import { OneSignal } from '@ionic-native/onesignal/ngx';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
+import { Network } from '@ionic-native/network/ngx';
+import { NetworkService } from './service/network.service';
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -31,6 +34,8 @@ import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
      FileTransfer,
     FileTransferObject,
     FilePath,
+    NetworkService,
+    Network
   ],
   bootstrap: [AppComponent]
 })

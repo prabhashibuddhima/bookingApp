@@ -81,7 +81,7 @@ export class BookingListPage implements OnInit {
         if (data.sno === 200) {
 
           console.log('updated');
-          
+
           this.successMsg();
           this.router.navigate(['calendar-book']);
 
@@ -127,7 +127,7 @@ export class BookingListPage implements OnInit {
       if (data.sno === 200) {
 
         console.log('deleted');
-        
+
         this.successDelete();
         this.router.navigate(['home']);
 
@@ -229,9 +229,10 @@ export class BookingListPage implements OnInit {
       buttons: [{
         text: 'Ok',
         handler: () => {
-         
+
           this.router.navigate(['calendar-book']);
-        }}]
+        }
+      }]
     });
 
     await alert.present();
@@ -244,9 +245,10 @@ export class BookingListPage implements OnInit {
       buttons: [{
         text: 'Ok',
         handler: () => {
-         
+
           this.router.navigate(['calendar-book']);
-        }}]
+        }
+      }]
     });
 
     await alert.present();
@@ -275,7 +277,7 @@ export class BookingListPage implements OnInit {
 
   async deleteErr() {
     const alert = await this.alertCtrl.create({
-      
+
       message: 'You Can not Delete this Event!',
       buttons: ['OK']
     });
@@ -286,7 +288,7 @@ export class BookingListPage implements OnInit {
 
   async alreadyReq() {
     const alert = await this.alertCtrl.create({
-      
+
       message: 'You have already requested!',
       buttons: ['OK']
     });

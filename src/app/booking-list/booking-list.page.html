@@ -9,86 +9,118 @@
 
 
 <ion-content *ngIf="reqUser=='true'">
-  <ion-grid style="margin-top: 10%">
+  <ion-grid style="margin-top: 10%; display: table">
     <ion-row>
-      <ion-col align="center">
-        <ion-item>
+      <ion-item>
+        <ion-col>
+
           <ion-label>
-           <b> Board Room : </b>
+            <b> Board Room : </b>
           </ion-label>
-          <ion-label >
+        </ion-col>
+
+        <ion-col>
+          <ion-label style="float:left;margin-left: 5%">
             {{selectedBdNo}}
           </ion-label>
+        </ion-col>
 
-        </ion-item>
-      </ion-col>
+      </ion-item>
+
+
     </ion-row>
 
     <ion-row>
-      <ion-col align="center">
-        <ion-item>
+
+      <ion-item>
+        <ion-col>
+
           <ion-label>
-              <b> Title : </b> 
+            <b> Title : </b>
           </ion-label>
-          <ion-input [(ngModel)]="selectedTitle" style="margin-left: 39%;">
+
+        </ion-col>
+
+        <ion-col>
+          <ion-input [(ngModel)]="selectedTitle">
 
           </ion-input>
-
-        </ion-item>
-      </ion-col>
+        </ion-col>
+      </ion-item>
     </ion-row>
 
     <ion-row>
-      <ion-col align="center">
-        <ion-item>
+      <ion-item>
+        <ion-col>
+
           <ion-label>
-              <b> Book By : </b> 
+            <b> Book By : </b>
           </ion-label>
-          <ion-label>
+
+        </ion-col>
+
+        <ion-col>
+
+          <ion-label style="float:left; margin-left: 5%">
             {{selectedPerson}}
           </ion-label>
 
-        </ion-item>
-      </ion-col>
+        </ion-col>
+      </ion-item>
+
     </ion-row>
+
     <ion-row>
-      <ion-col align="center">
-        <ion-item>
+      <ion-item>
+        <ion-col>
+
           <ion-label>
-              <b> Description : </b> 
+            <b> Description : </b>
           </ion-label>
-          <ion-input [(ngModel)]="selectedDesc" style="margin-left: 39%;">
-           
+
+        </ion-col>
+
+        <ion-col>
+
+          <ion-input [(ngModel)]="selectedDesc">
+
           </ion-input>
-
-        </ion-item>
-
-      </ion-col>
+        </ion-col>
+      </ion-item>
     </ion-row>
+
     <ion-row>
-      <ion-col align="center">
-        <ion-item>
+      <ion-item>
+        <ion-col>
+
           <ion-label>
-              <b>  Start Time : </b> 
+            <b> Start Time : </b>
           </ion-label>
+        </ion-col>
+
+        <ion-col>
           <ion-datetime displayFormat="MM/DD/YYYY HH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="selectedStartTime"
-            [min]="minDate"></ion-datetime>
+            [min]="minDate" style="float:left; margin-left:-3%"></ion-datetime>
+        </ion-col>
 
-        </ion-item>
-
-      </ion-col>
+      </ion-item>
     </ion-row>
+
     <ion-row>
-      <ion-col align="center">
-
-        <ion-item>
+      <ion-item>
+        <ion-col>
           <ion-label>
-              <b> End Time : </b> 
+            <b> End Time : </b>
           </ion-label>
-          <ion-datetime displayFormat="MM/DD/YYYY HH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="selectedEndTime" [min]="minDate"></ion-datetime>
-        </ion-item>
+        </ion-col>
 
-      </ion-col>
+        <ion-col>
+
+          <ion-datetime displayFormat="MM/DD/YYYY HH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="selectedEndTime" [min]="minDate"
+            style="float:left; margin-left:-3%"></ion-datetime>
+
+        </ion-col>
+      </ion-item>
     </ion-row>
 
     <ion-row style="margin-left: 5%; width: 85%; float: left; margin-top: 10%">
@@ -118,7 +150,7 @@
 
 <ion-content *ngIf="reqUser=='false'">
 
-  <ion-grid style="margin-top: 10%">
+  <ion-grid style="margin-top: 10%; display: table">
     <ion-row>
       <ion-col align="center">
         <ion-item>
