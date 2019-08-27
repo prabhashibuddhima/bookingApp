@@ -11,10 +11,10 @@ import { environment } from '../../environments/environment';
   providedIn: 'root'
 })
 export class AuthenticationService {
+  URL = 'http://104.247.79.129:3000/';
+  constructor(private storage: Storage, private http: HTTP, private router: Router) {
 
-  constructor(private storage: Storage, private http: HTTP,private router: Router) {
-    
-   }
+  }
 
   getToken() {
     return this.storage.get('token');
@@ -23,8 +23,8 @@ export class AuthenticationService {
   getEmail() {
     return this.storage.get('email');
   }
-  
-  getFullName(){
+
+  getFullName() {
     return this.storage.get('fullname');
   }
 
@@ -36,7 +36,7 @@ export class AuthenticationService {
     return this.storage.get('id');
   }
 
-  loginAuthenticate(email, isAuthentication, token, id,fullname,isApproved) {
+  loginAuthenticate(email, isAuthentication, token, id, fullname, isApproved) {
     this.storage.set("email", email);
     this.storage.set("isAuthentication", isAuthentication);
     this.storage.set("token", token);
@@ -45,11 +45,11 @@ export class AuthenticationService {
     this.storage.set("isApproved", isApproved)
   }
 
-  requestsNumber(rlength){
+  requestsNumber(rlength) {
     this.storage.set("rlength", rlength);
   }
 
-  
+
   logoutAuthenticate() {
     this.storage.set("email", "");
     this.storage.set("isAuthentication", false);
@@ -58,11 +58,11 @@ export class AuthenticationService {
     this.storage.set("fullname", "");
     this.storage.set("isApproved", 0);
     this.router.navigate(['/first-page']);
-    
+
   }
 
   loginPassData(data) {
-    let url = environment.back_end_URL + 'login';
-    return this.http.post(url, data, {});
+
+    return this.http.post(this.URL + 'login', data, {});
   }
 }

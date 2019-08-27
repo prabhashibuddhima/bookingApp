@@ -26,6 +26,7 @@ export class CalendarBookPage implements OnInit {
   evparams: any = {};
   uFullName: any;
   trueUser: any;
+  collapseCard: any;
 
 
   event = {
@@ -49,7 +50,7 @@ export class CalendarBookPage implements OnInit {
 
   };
 
-  markDisabled =(date: Date) =>{
+  markDisabled = (date: Date) => {
     var current = new Date(new Date().setDate(new Date().getDate() - 1));;
     return date < current;
   }
@@ -227,7 +228,7 @@ export class CalendarBookPage implements OnInit {
 
   // Calendar event was clicked
   async onEventSelected(event) {
-    
+
     let start = formatDate(event.startTime, 'medium', this.locale);
     let end = formatDate(event.endTime, 'medium', this.locale);
 

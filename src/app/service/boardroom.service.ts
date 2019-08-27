@@ -6,7 +6,7 @@ import { HTTP } from '@ionic-native/http/ngx';
   providedIn: 'root'
 })
 export class BoardroomService {
-  URL = environment.back_end_URL
+  URL = 'http://104.247.79.129:3000/';
   constructor(private http: HTTP) { }
 
   register(data) {
