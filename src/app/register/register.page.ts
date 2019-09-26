@@ -33,7 +33,7 @@ export class RegisterPage implements OnInit {
     this.regForm = this.formBuilder.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      email: ['', Validators.pattern('^[a-zA-Z0-9_.+-]+@ogilvy.com')],
+      email: ['', Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')],
       password: [''],
       repassword: ['']
     });
