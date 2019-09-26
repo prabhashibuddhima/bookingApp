@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.ogilvy.bookboardroom" version="0.1.3" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.neoogilvy.bookboardroom" version="0.1.3" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Book BoardRoom</name>
     <description>Boardroom booking app</description>
     <author email="prabhashineo@gmail.com" href="http://ogilvy.lk/neo/">Ogilvy team</author>
